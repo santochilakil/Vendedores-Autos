@@ -1,1 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Página del vendedor</title>
+
+    <style>
+
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111;
+            color: white;
+            min-height: 100vh;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           BARRA SUPERIOR DEL VENDEDOR
+        ===================================================== */
+
+        .barra-vendedor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 8px 15px;
+
+            background: rgba(0, 0, 0, 0.78);
+
+            backdrop-filter: blur(8px);
+
+            z-index: 1000;
+        }
+
+        .informacion-vendedor {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .foto-mini {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid white;
+        }
+
+        .nombre-mini {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .agencia-mini {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-top: 3px;
+        }
+
+        .botones-superiores {
+            display: flex;
+            gap: 7px;
+        }
+
+        .boton-contacto {
+            width: 38px;
+            height: 38px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            font-size: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           PÁGINA DE BIENVENIDA
+        ===================================================== */
+
+        .bienvenida {
+            min-height: 100vh;
+
+            padding: 100px 20px 50px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.48),
+                    rgba(0, 0, 0, 0.72)
+                ),
+                url("fondo-bienvenida.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo-marca {
+            width: 150px;
+            max-width: 60%;
+
+            margin-bottom: 22px;
+
+            object-fit: contain;
+        }
+
+
+        /* =====================================================
+           FOTO DEL VENDEDOR
+        ===================================================== */
+
+        .foto-vendedor {
+            width: 120px;
+            height: 120px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 4px solid white;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =====================================================
+           NOMBRE DEL VENDEDOR
+        ===================================================== */
+
+        .bienvenida h1 {
+            font-size: 32px;
+            font-weight: 800;
+
+            margin-bottom: 7px;
+        }
+
+        .puesto {
+            font-size: 17px;
+            opacity: 0.9;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* =====================================================
+           MENSAJE PRINCIPAL
+        ===================================================== */
+
+        .mensaje-principal {
+            width: 100%;
+            max-width: 520px;
+
+            font-size: 25px;
+            line-height: 1.25;
+
+            font-weight: 800;
+
+            margin-bottom: 14px;
+        }
+
+        .mensaje-secundario {
+            width: 100%;
+            max-width: 470px;
+
+            font-size: 15px;
+            line-height: 1.5;
+
+            opacity: 0.9;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           PROMOCIÓN
+        ===================================================== */
+
+        .promocion {
+            width: 100%;
+            max-width: 520px;
+
+            padding: 18px;
+
+            margin-bottom: 28px;
+
+            border-radius: 17px;
+
+            background: rgba(0, 0, 0, 0.72);
+
+            border: 1px solid rgba(255,255,255,0.35);
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.35);
+        }
+
+        .promocion-etiqueta {
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+
+            opacity: 0.85;
+        }
+
+        .promocion-titulo {
+            font-size: 23px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .promocion-detalle {
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           BOTÓN SIGUIENTE
+        ===================================================== */
+
+        .boton-siguiente {
+            border: none;
+
+            padding: 15px 48px;
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #111;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.35);
+
+            transition: transform 0.2s;
+        }
+
+        .boton-siguiente:hover {
+            transform: scale(1.04);
+        }
+
+
+        /* =====================================================
+           PÁGINA PRINCIPAL
+        ===================================================== */
+
+        .pagina-principal {
+            display: none;
+
+            min-height: 100vh;
+
+            padding: 105px 20px 45px;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.58),
+                    rgba(0, 0, 0, 0.82)
+                ),
+                url("fondo-bienvenida.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .contenido-principal {
+            width: 100%;
+            max-width: 600px;
+
+            margin: 0 auto;
+
+            text-align: center;
+        }
+
+        .contenido-principal h2 {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .contenido-principal > p {
+            font-size: 16px;
+
+            opacity: 0.85;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =====================================================
+           BOTONES PRINCIPALES
+        ===================================================== */
+
+        .menu-principal {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 18px;
+        }
+
+        .boton-menu {
+            width: 100%;
+
+            padding: 27px 20px;
+
+            border: none;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,0.96);
+
+            color: #111;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 28px rgba(0,0,0,0.35);
+        }
+
+        .boton-menu span {
+            display: block;
+
+            margin-top: 7px;
+
+            font-size: 13px;
+
+            font-weight: normal;
+
+            opacity: 0.65;
+        }
+
+
+        /* =====================================================
+           CONTACTO INFERIOR
+        ===================================================== */
+
+        .contacto-inferior {
+            margin-top: 40px;
+
+            padding: 18px;
+
+            border-radius: 16px;
+
+            background: rgba(0,0,0,0.65);
+        }
+
+        .contacto-inferior p {
+            font-size: 14px;
+
+            margin-bottom: 13px;
+        }
+
+        .botones-inferiores {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+        }
+
+        .boton-inferior {
+            border: none;
+
+            padding: 11px 18px;
+
+            border-radius: 25px;
+
+            background: white;
+
+            color: #111;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           CELULARES
+        ===================================================== */
+
+        @media (max-width: 500px) {
+
+            .bienvenida h1 {
+                font-size: 28px;
+            }
+
+            .mensaje-principal {
+                font-size: 21px;
+            }
+
+            .promocion-titulo {
+                font-size: 20px;
+            }
+
+            .boton-menu {
+                font-size: 21px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BARRA SUPERIOR
+    ===================================================== -->
+
+    <header class="barra-vendedor">
+
+        <div class="informacion-vendedor">
+
+            <img
+                id="fotoMini"
+                class="foto-mini"
+                src="vendedor.jpg"
+                alt="Foto del vendedor"
+            >
+
+            <div>
+
+                <div
+                    id="nombreMini"
+                    class="nombre-mini"
+                >
+                    Nombre del vendedor
+                </div>
+
+                <div
+                    id="agenciaMini"
+                    class="agencia-mini"
+                >
+                    Nombre de la agencia
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="botones-superiores">
+
+            <button
+                class="boton-contacto"
+                onclick="contactarWhatsApp()"
+                aria-label="WhatsApp"
+            >
+                💬
+            </button>
+
+            <button
+                class="boton-contacto"
+                onclick="llamarVendedor()"
+                aria-label="Llamar"
+            >
+                📞
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         BIENVENIDA
+    ===================================================== -->
+
+    <section
+        id="pantallaBienvenida"
+        class="bienvenida"
+    >
+
+        <img
+            id="logoMarca"
+            class="logo-marca"
+            src="logo-marca.png"
+            alt="Logo de la agencia"
+        >
+
+
+        <img
+            id="fotoVendedor"
+            class="foto-vendedor"
+            src="vendedor.jpg"
+            alt="Vendedor"
+        >
+
+
+        <h1 id="nombreVendedor">
+            Nombre del vendedor
+        </h1>
+
+
+        <div
+            id="puestoVendedor"
+            class="puesto"
+        >
+            Asesor de ventas
+        </div>
+
+
+        <div
+            id="mensajePrincipal"
+            class="mensaje-principal"
+        >
+            Atención personalizada para encontrar el auto ideal para ti.
+        </div>
+
+
+        <div
+            id="mensajeSecundario"
+            class="mensaje-secundario"
+        >
+            Conoce nuestros modelos, consulta precios y encuentra la opción
+            que mejor se adapte a tus necesidades.
+        </div>
+
+
+        <!-- PROMOCIÓN -->
+
+        <div class="promocion">
+
+            <div class="promocion-etiqueta">
+                Promoción especial
+            </div>
+
+            <div
+                id="tituloPromocion"
+                class="promocion-titulo"
+            >
+                Promoción del mes
+            </div>
+
+            <div
+                id="detallePromocion"
+                class="promocion-detalle"
+            >
+                Consulta nuestras promociones vigentes.
+            </div>
+
+        </div>
+
+
+        <button
+            class="boton-siguiente"
+            onclick="mostrarPaginaPrincipal()"
+        >
+            Siguiente
+        </button>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PÁGINA PRINCIPAL
+    ===================================================== -->
+
+    <section
+        id="pantallaPrincipal"
+        class="pagina-principal"
+    >
+
+        <div class="contenido-principal">
+
+            <h2>
+                Bienvenido
+            </h2>
+
+            <p>
+                Explora nuestros vehículos o calcula tu mensualidad.
+            </p>
+
+
+            <div class="menu-principal">
+
+                <button
+                    class="boton-menu"
+                    onclick="abrirCatalogo()"
+                >
+                    🚗 CATÁLOGO
+
+                    <span>
+                        Conoce nuestros vehículos
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="boton-menu"
+                    onclick="abrirCotizador()"
+                >
+                    💰 COTIZAR
+
+                    <span>
+                        Calcula tu mensualidad
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div class="contacto-inferior">
+
+                <p>
+                    ¿Necesitas información?
+                </p>
+
+                <div class="botones-inferiores">
+
+                    <button
+                        class="boton-inferior"
+                        onclick="contactarWhatsApp()"
+                    >
+                        💬 WhatsApp
+                    </button>
+
+
+                    <button
+                        class="boton-inferior"
+                        onclick="llamarVendedor()"
+                    >
+                        📞 Llamar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           CONFIGURACIÓN DE ESTA PÁGINA
+           
+           ESTA ES LA ZONA QUE MÁS ADELANTE ESTARÁ CONECTADA
+           CON FIREBASE Y LOS PANELES DE CONTROL.
+
+           POR AHORA LOS DATOS SON DE PRUEBA.
+        ===================================================== */
+
+
+        const CONFIGURACION = {
+
+            vendedor: {
+
+                nombre: "Nombre del vendedor",
+
+                puesto: "Asesor de ventas",
+
+                telefono: "9980000000",
+
+                whatsapp: "529980000000"
+
+            },
+
+
+            agencia: {
+
+                nombre: "Mitsubishi Cancún"
+
+            },
+
+
+            marca: {
+
+                logo: "logo-marca.png",
+
+                fondoBienvenida: "fondo-bienvenida.jpg"
+
+            },
+
+
+            bienvenida: {
+
+                titulo:
+                    "Atención personalizada para encontrar el auto ideal para ti.",
+
+                subtitulo:
+                    "Conoce nuestros modelos, consulta precios y encuentra la opción que mejor se adapte a tus necesidades."
+
+            },
+
+
+            promocion: {
+
+                titulo:
+                    "Promoción del mes",
+
+                detalle:
+                    "Consulta nuestras promociones vigentes."
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           CARGAR CONFIGURACIÓN
+        ===================================================== */
+
+        function cargarConfiguracion() {
+
+
+            /* VENDEDOR */
+
+            document.getElementById("nombreVendedor").textContent =
+                CONFIGURACION.vendedor.nombre;
+
+
+            document.getElementById("nombreMini").textContent =
+                CONFIGURACION.vendedor.nombre;
+
+
+            document.getElementById("puestoVendedor").textContent =
+                CONFIGURACION.vendedor.puesto;
+
+
+            /* AGENCIA */
+
+            document.getElementById("agenciaMini").textContent =
+                CONFIGURACION.agencia.nombre;
+
+
+            /* BIENVENIDA */
+
+            document.getElementById("mensajePrincipal").textContent =
+                CONFIGURACION.bienvenida.titulo;
+
+
+            document.getElementById("mensajeSecundario").textContent =
+                CONFIGURACION.bienvenida.subtitulo;
+
+
+            /* PROMOCIÓN */
+
+            document.getElementById("tituloPromocion").textContent =
+                CONFIGURACION.promocion.titulo;
+
+
+            document.getElementById("detallePromocion").textContent =
+                CONFIGURACION.promocion.detalle;
+
+
+            /* LOGO */
+
+            document.getElementById("logoMarca").src =
+                CONFIGURACION.marca.logo;
+
+
+            /* FONDO */
+
+            document.getElementById("pantallaBienvenida").style.backgroundImage =
+                `linear-gradient(
+                    rgba(0, 0, 0, 0.48),
+                    rgba(0, 0, 0, 0.72)
+                ),
+                url("${CONFIGURACION.marca.fondoBienvenida}")`;
+
+
+            document.getElementById("pantallaPrincipal").style.backgroundImage =
+                `linear-gradient(
+                    rgba(0, 0, 0, 0.58),
+                    rgba(0, 0, 0, 0.82)
+                ),
+                url("${CONFIGURACION.marca.fondoBienvenida}")`;
+
+        }
+
+
+
+        /* =====================================================
+           MOSTRAR PÁGINA PRINCIPAL
+        ===================================================== */
+
+        function mostrarPaginaPrincipal() {
+
+            document.getElementById("pantallaBienvenida").style.display =
+                "none";
+
+
+            document.getElementById("pantallaPrincipal").style.display =
+                "block";
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+
+        /* =====================================================
+           CATÁLOGO
+           
+           TODAVÍA NO LO CONSTRUIMOS.
+        ===================================================== */
+
+        function abrirCatalogo() {
+
+            alert(
+                "Aquí construiremos el catálogo de vehículos."
+            );
+
+        }
+
+
+
+        /* =====================================================
+           COTIZADOR
+           
+           TODAVÍA NO LO CONSTRUIMOS.
+        ===================================================== */
+
+        function abrirCotizador() {
+
+            alert(
+                "Aquí construiremos el cotizador."
+            );
+
+        }
+
+
+
+        /* =====================================================
+           WHATSAPP
+        ===================================================== */
+
+        function contactarWhatsApp() {
+
+            const mensaje =
+                "Hola " +
+                CONFIGURACION.vendedor.nombre +
+                ", vi tu página y me gustaría recibir información.";
+
+
+            const url =
+                "https://wa.me/" +
+                CONFIGURACION.vendedor.whatsapp +
+                "?text=" +
+                encodeURIComponent(mensaje);
+
+
+            window.open(url, "_blank");
+
+        }
+
+
+
+        /* =====================================================
+           LLAMAR
+        ===================================================== */
+
+        function llamarVendedor() {
+
+            window.location.href =
+                "tel:" +
+                CONFIGURACION.vendedor.telefono;
+
+        }
+
+
+
+        /* =====================================================
+           INICIAR
+        ===================================================== */
+
+        cargarConfiguracion();
+
+
+    </script>
+
+</body>
+</html>
