@@ -1,83 +1,771 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Encuentra tu próximo vehículo."
+  >
 
   <title>Vendedores-Autos</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <link
+    rel="stylesheet"
+    href="css/estilos.css"
+  >
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #111827;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 25px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    header p {
-      color: #d1d5db;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-
-    .bienvenida {
-      background: white;
-      border-radius: 18px;
-      padding: 35px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-
-    .bienvenida h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
-
-    .bienvenida p {
-      font-size: 18px;
-      color: #6b7280;
-    }
-  </style>
 </head>
+
 
 <body>
 
-  <header>
-    <h1>Vendedores-Autos</h1>
-    <p>Tu plataforma profesional para vender más autos</p>
-  </header>
 
-  <main>
-    <section class="bienvenida">
-      <h2>Bienvenido</h2>
+<!-- =========================================
+     ENCABEZADO
+========================================= -->
 
-      <p>
-        Estamos construyendo tu nueva herramienta profesional
-        para vendedores de autos.
+<header class="header-publico">
+
+  <div class="header-contenedor">
+
+    <div class="identidad">
+
+      <img
+        id="logoAgencia"
+        src="img/logo/logo.png"
+        alt="Logo"
+        class="logo"
+      >
+
+      <div>
+
+        <h1 id="nombreAgencia">
+          Agencia de Autos
+        </h1>
+
+        <p id="nombreVendedor">
+          Tu vendedor
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn-menu"
+      onclick="abrirMenu()"
+    >
+      ☰
+    </button>
+
+
+    <nav id="menuPublico">
+
+      <a href="#modelos">
+        Modelos
+      </a>
+
+      <a href="#promocion">
+        Promoción
+      </a>
+
+      <a href="#cotizador">
+        Cotizar
+      </a>
+
+      <button
+        class="btn-contactar"
+        onclick="abrirContacto()"
+      >
+        Contactar
+      </button>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero">
+
+  <div class="hero-contenido">
+
+    <span class="etiqueta">
+      Compra de manera sencilla
+    </span>
+
+    <h2>
+      Encuentra el vehículo
+      <span>para ti.</span>
+    </h2>
+
+    <p>
+      Explora modelos, conoce precios,
+      compara opciones y calcula tu mensualidad.
+    </p>
+
+
+    <div class="hero-botones">
+
+      <button
+        class="btn-principal"
+        onclick="irAModelos()"
+      >
+        🚗 Ver modelos
+      </button>
+
+
+      <button
+        class="btn-secundario"
+        onclick="abrirCotizador()"
+      >
+        🧮 Cotizar
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     PROMOCIÓN
+========================================= -->
+
+<section
+  class="promocion-seccion"
+  id="promocion"
+>
+
+  <div class="promocion">
+
+    <div class="promocion-texto">
+
+      <span class="promocion-etiqueta">
+        🔥 PROMOCIÓN DEL MES
+      </span>
+
+      <h2 id="promocionTitulo">
+        Este mes mamá puede estrenar
+      </h2>
+
+      <p id="promocionDescripcion">
+        Aprovecha las promociones especiales
+        disponibles durante este mes.
       </p>
-    </section>
-  </main>
+
+
+      <div class="promocion-beneficios">
+
+        <div>
+
+          <small>
+            Bono
+          </small>
+
+          <strong id="promocionBono">
+            $30,000
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Descuento
+          </small>
+
+          <strong id="promocionDescuento">
+            $10,000
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="promocion-imagen">
+
+      <img
+        id="imagenPromocion"
+        src="img/promociones/promocion.jpg"
+        alt="Promoción"
+      >
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     MODELOS
+========================================= -->
+
+<main>
+
+<section id="modelos">
+
+  <div class="titulo-seccion">
+
+    <span>
+      NUESTROS VEHÍCULOS
+    </span>
+
+    <h2>
+      Encuentra tu próximo auto
+    </h2>
+
+    <p>
+      Explora nuestros modelos disponibles.
+    </p>
+
+  </div>
+
+
+  <!-- FILTROS -->
+
+  <div class="filtros">
+
+    <input
+      type="search"
+      id="buscarModelo"
+      placeholder="🔎 Buscar modelo..."
+    >
+
+
+    <select id="filtroCategoria">
+
+      <option value="">
+        Todas las categorías
+      </option>
+
+      <option value="SUV">
+        SUV
+      </option>
+
+      <option value="Sedán">
+        Sedán
+      </option>
+
+      <option value="Pickup">
+        Pickup
+      </option>
+
+      <option value="Híbrido">
+        Híbridos
+      </option>
+
+      <option value="Eléctrico">
+        Eléctricos
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <!-- PESTAÑAS -->
+
+  <div
+    class="pestanas"
+    id="pestanasCategorias"
+  >
+
+    <button
+      class="pestana activa"
+      data-categoria=""
+    >
+      Todos
+    </button>
+
+    <button
+      class="pestana"
+      data-categoria="SUV"
+    >
+      SUV
+    </button>
+
+    <button
+      class="pestana"
+      data-categoria="Sedán"
+    >
+      Sedán
+    </button>
+
+    <button
+      class="pestana"
+      data-categoria="Pickup"
+    >
+      Pickup
+    </button>
+
+    <button
+      class="pestana"
+      data-categoria="Híbrido"
+    >
+      Híbridos
+    </button>
+
+    <button
+      class="pestana"
+      data-categoria="Eléctrico"
+    >
+      Eléctricos
+    </button>
+
+  </div>
+
+
+  <!-- CATÁLOGO -->
+
+  <div
+    class="catalogo"
+    id="catalogo"
+  >
+
+  </div>
+
+</section>
+
+
+<!-- =========================================
+     COTIZADOR
+========================================= -->
+
+<section
+  id="cotizador"
+  class="seccion-cotizador"
+>
+
+  <div class="titulo-seccion">
+
+    <span>
+      COTIZADOR
+    </span>
+
+    <h2>
+      Calcula tu mensualidad
+    </h2>
+
+    <p>
+      Haz una simulación sin proporcionar
+      ningún dato personal.
+    </p>
+
+  </div>
+
+
+  <div class="cotizador">
+
+    <div class="campo">
+
+      <label>
+        Vehículo
+      </label>
+
+      <select id="cotizadorModelo">
+      </select>
+
+    </div>
+
+
+    <div class="campo">
+
+      <label>
+        Enganche
+      </label>
+
+      <input
+        type="number"
+        id="cotizadorEnganche"
+        value="100000"
+        min="0"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label>
+        Plazo
+      </label>
+
+      <select id="cotizadorPlazo">
+
+        <option value="24">
+          24 meses
+        </option>
+
+        <option value="36">
+          36 meses
+        </option>
+
+        <option value="48">
+          48 meses
+        </option>
+
+        <option value="60">
+          60 meses
+        </option>
+
+        <option value="72">
+          72 meses
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="resultado-cotizador">
+
+      <span>
+        Mensualidad aproximada
+      </span>
+
+      <strong id="mensualidad">
+        $0
+      </strong>
+
+      <small>
+        *Simulación informativa. Sujeta a condiciones
+        de la institución financiera.
+      </small>
+
+    </div>
+
+
+    <button
+      class="btn-principal btn-ancho"
+      onclick="enviarCotizacion()"
+    >
+      💬 Me interesa esta cotización
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================
+     CONTACTO
+========================================= -->
+
+<div
+  id="modalContacto"
+  class="modal"
+>
+
+  <div class="modal-contenido">
+
+    <button
+      class="cerrar"
+      onclick="cerrarModal('modalContacto')"
+    >
+      ×
+    </button>
+
+
+    <h2>
+      ¿Cómo quieres continuar?
+    </h2>
+
+    <p>
+      Elige la opción que prefieras.
+    </p>
+
+
+    <div class="acciones">
+
+      <button
+        class="accion whatsapp"
+        onclick="contactarWhatsApp()"
+      >
+        💬
+        <span>
+          WhatsApp
+        </span>
+      </button>
+
+
+      <button
+        class="accion prueba"
+        onclick="abrirPruebaManejo()"
+      >
+        🚘
+        <span>
+          Prueba de manejo
+        </span>
+      </button>
+
+
+      <button
+        class="accion llamada"
+        onclick="llamarVendedor()"
+      >
+        📞
+        <span>
+          Llamar al vendedor
+        </span>
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     DETALLE VEHÍCULO
+========================================= -->
+
+<div
+  id="modalVehiculo"
+  class="modal"
+>
+
+  <div class="modal-contenido modal-auto">
+
+    <button
+      class="cerrar"
+      onclick="cerrarModal('modalVehiculo')"
+    >
+      ×
+    </button>
+
+
+    <img
+      id="detalleImagen"
+      class="detalle-imagen"
+      src=""
+      alt=""
+    >
+
+
+    <span id="detalleMarca">
+    </span>
+
+
+    <h2 id="detalleModelo">
+    </h2>
+
+
+    <p
+      id="detalleVersion"
+      class="detalle-version"
+    >
+    </p>
+
+
+    <div class="detalle-precio">
+
+      <small>
+        Desde
+      </small>
+
+      <strong id="detallePrecio">
+      </strong>
+
+    </div>
+
+
+    <div
+      id="detalleCaracteristicas"
+      class="caracteristicas"
+    >
+    </div>
+
+
+    <div class="acciones">
+
+      <button
+        class="accion cotizar"
+        onclick="cotizarVehiculoActual()"
+      >
+        🧮 Cotizar
+      </button>
+
+
+      <button
+        class="accion whatsapp"
+        onclick="contactarVehiculo()"
+      >
+        💬 WhatsApp
+      </button>
+
+
+      <button
+        class="accion prueba"
+        onclick="abrirPruebaManejo()"
+      >
+        🚘 Prueba de manejo
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     PRUEBA DE MANEJO
+========================================= -->
+
+<div
+  id="modalPrueba"
+  class="modal"
+>
+
+  <div class="modal-contenido">
+
+    <button
+      class="cerrar"
+      onclick="cerrarModal('modalPrueba')"
+    >
+      ×
+    </button>
+
+
+    <h2>
+      🚘 Solicitar prueba de manejo
+    </h2>
+
+    <p>
+      Para coordinar la prueba necesitamos
+      algunos datos de contacto.
+    </p>
+
+
+    <div class="aviso-privacidad">
+
+      🔒 Tus datos se utilizarán únicamente
+      para atender esta solicitud.
+
+    </div>
+
+
+    <div class="campo">
+
+      <label>
+        Nombre
+      </label>
+
+      <input
+        type="text"
+        id="nombrePrueba"
+        placeholder="Tu nombre"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label>
+        Teléfono
+      </label>
+
+      <input
+        type="tel"
+        id="telefonoPrueba"
+        placeholder="Tu teléfono"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label>
+        Vehículo
+      </label>
+
+      <select id="pruebaModelo">
+      </select>
+
+    </div>
+
+
+    <button
+      class="btn-principal btn-ancho"
+      onclick="solicitarPrueba()"
+    >
+      🚘 Solicitar prueba
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+  <img
+    id="logoFooter"
+    src="img/logo/logo.png"
+    alt="Logo"
+  >
+
+  <h3 id="footerAgencia">
+    Agencia de Autos
+  </h3>
+
+  <p id="footerVendedor">
+    Tu vendedor
+  </p>
+
+
+  <div class="footer-acciones">
+
+    <button
+      onclick="contactarWhatsApp()"
+    >
+      💬 WhatsApp
+    </button>
+
+    <button
+      onclick="llamarVendedor()"
+    >
+      📞 Llamar
+    </button>
+
+  </div>
+
+</footer>
+
+
+<script src="js/datos.js"></script>
+<script src="js/publico.js"></script>
 
 </body>
+
 </html>
