@@ -1,196 +1,292 @@
-/* =====================================================
-   VARIABLES
-===================================================== */
+/* =========================================================
+   Vendedores-Autos
+   JAVASCRIPT DE LA PÁGINA PÚBLICA
 
-let vehiculoActual = null;
+   Este archivo controla:
+   - Catálogo
+   - Filtros
+   - Búsqueda
+   - Detalle de vehículos
+   - Cotizador
+   - WhatsApp
+   - Llamadas
+   - Prueba de manejo
+   - Menú móvil
+   - Registro básico de interacciones
+
+   IMPORTANTE:
+   Por ahora funciona con datos.js.
+   Posteriormente conectaremos Firebase.
+========================================================= */
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 let categoriaActual = "";
 
+let vehiculoActual = null;
 
-/* =====================================================
+
+/* =========================================================
    INICIO
-===================================================== */
+========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-    cargarConfiguracion();
+  cargarInformacionAgencia();
 
-    cargarPromocion();
+  cargarPromocion();
 
-    mostrarVehiculos();
+  cargarCatalogo();
 
-    cargarSelects();
+  cargarSelectores();
 
-    calcularMensualidad();
+  configurarEventos();
 
-    configurarEventos();
+  calcularMensualidad();
+
+});
+
+
+/* =========================================================
+   INFORMACIÓN DE AGENCIA Y VENDEDOR
+========================================================= */
+
+function cargarInformacionAgencia() {
+
+  if (!CONFIG) return;
+
+
+  const agencia = CONFIG.agencia || {};
+
+  const vendedor = CONFIG.vendedor || {};
+
+
+  const nombreAgencia =
+    document.getElementById("nombreAgencia");
+
+  const nombreVendedor =
+    document.getElementById("nombreVendedor");
+
+  const logoAgencia =
+    document.getElementById("logoAgencia");
+
+  const footerAgencia =
+    document.getElementById("footerAgencia");
+
+  const footerVendedor =
+    document.getElementById("footerVendedor");
+
+  const logoFooter =
+    document.getElementById("logoFooter");
+
+
+  if (nombreAgencia) {
+
+    nombreAgencia.textContent =
+      agencia.nombre || "Agencia de Autos";
 
   }
-);
 
 
-/* =====================================================
-   CONFIGURACIÓN
-===================================================== */
+  if (nombreVendedor) {
 
-function cargarConfiguracion() {
+    nombreVendedor.textContent =
+      vendedor.nombre || "Tu vendedor";
 
-  document.getElementById(
-    "nombreAgencia"
-  ).textContent =
-    CONFIG.agencia;
+  }
 
 
-  document.getElementById(
-    "nombreVendedor"
-  ).textContent =
-    CONFIG.vendedor;
+  if (footerAgencia) {
+
+    footerAgencia.textContent =
+      agencia.nombre || "Agencia de Autos";
+
+  }
 
 
-  document.getElementById(
-    "footerAgencia"
-  ).textContent =
-    CONFIG.agencia;
+  if (footerVendedor) {
+
+    footerVendedor.textContent =
+      vendedor.nombre || "Tu vendedor";
+
+  }
 
 
-  document.getElementById(
-    "footerVendedor"
-  ).textContent =
-    CONFIG.vendedor;
+  if (logoAgencia && agencia.logo) {
+
+    logoAgencia.src = agencia.logo;
+
+  }
 
 
-  document.getElementById(
-    "logoAgencia"
-  ).src =
-    CONFIG.logo;
+  if (logoFooter && agencia.logo) {
 
+    logoFooter.src = agencia.logo;
 
-  document.getElementById(
-    "logoFooter"
-  ).src =
-    CONFIG.logo;
+  }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    PROMOCIÓN
-===================================================== */
+========================================================= */
 
 function cargarPromocion() {
 
-  if (!PROMOCION.activa) {
+  if (!CONFIG || !CONFIG.promocion) return;
 
-    document.getElementById(
-      "promocion"
-    ).style.display = "none";
 
-    return;
+  const promo = CONFIG.promocion;
+
+
+  const titulo =
+    document.getElementById("promocionTitulo");
+
+  const descripcion =
+    document.getElementById("promocionDescripcion");
+
+  const bono =
+    document.getElementById("promocionBono");
+
+  const descuento =
+    document.getElementById("promocionDescuento");
+
+  const imagen =
+    document.getElementById("imagenPromocion");
+
+
+  if (titulo) {
+
+    titulo.textContent =
+      promo.titulo || "";
 
   }
 
 
-  document.getElementById(
-    "promocionTitulo"
-  ).textContent =
-    PROMOCION.titulo;
+  if (descripcion) {
+
+    descripcion.textContent =
+      promo.descripcion || "";
+
+  }
 
 
-  document.getElementById(
-    "promocionDescripcion"
-  ).textContent =
-    PROMOCION.descripcion;
+  if (bono) {
+
+    bono.textContent =
+      formatoMoneda(promo.bono || 0);
+
+  }
 
 
-  document.getElementById(
-    "promocionBono"
-  ).textContent =
-    formatoPrecio(
-      PROMOCION.bono
-    );
+  if (descuento) {
+
+    descuento.textContent =
+      formatoMoneda(promo.descuento || 0);
+
+  }
 
 
-  document.getElementById(
-    "promocionDescuento"
-  ).textContent =
-    formatoPrecio(
-      PROMOCION.descuento
-    );
+  if (imagen && promo.imagen) {
 
+    imagen.src = promo.imagen;
 
-  document.getElementById(
-    "imagenPromocion"
-  ).src =
-    PROMOCION.imagen;
+    imagen.onerror = function () {
+
+      this.style.display = "none";
+
+    };
+
+  }
 
 }
 
 
-/* =====================================================
-   MOSTRAR VEHÍCULOS
-===================================================== */
+/* =========================================================
+   CATÁLOGO DE VEHÍCULOS
+========================================================= */
 
-function mostrarVehiculos() {
+function cargarCatalogo() {
 
-  const contenedor =
-    document.getElementById(
-      "catalogo"
-    );
+  const catalogo =
+    document.getElementById("catalogo");
 
 
-  const busqueda =
-    document.getElementById(
-      "buscarModelo"
-    ).value
-      .toLowerCase()
-      .trim();
+  if (!catalogo) return;
 
 
-  const filtrados =
-    VEHICULOS.filter(
-      vehiculo => {
-
-        const coincideCategoria =
-          !categoriaActual ||
-          vehiculo.categoria === categoriaActual;
+  let vehiculos =
+    obtenerVehiculosDisponibles();
 
 
-        const texto =
-          `${vehiculo.marca} ${vehiculo.modelo}`
-            .toLowerCase();
+  /* FILTRO POR CATEGORÍA */
+
+  if (categoriaActual) {
+
+    vehiculos =
+      vehiculos.filter(function (vehiculo) {
+
+        return vehiculo.categoria === categoriaActual;
+
+      });
+
+  }
 
 
-        const coincideBusqueda =
-          !busqueda ||
-          texto.includes(busqueda);
+  /* FILTRO POR BÚSQUEDA */
+
+  const buscador =
+    document.getElementById("buscarModelo");
 
 
-        return (
-          coincideCategoria &&
-          coincideBusqueda
-        );
+  if (buscador && buscador.value.trim() !== "") {
 
-      }
-    );
-
-
-  contenedor.innerHTML = "";
+    const texto =
+      buscador.value
+        .toLowerCase()
+        .trim();
 
 
-  if (!filtrados.length) {
+    vehiculos =
+      vehiculos.filter(function (vehiculo) {
 
-    contenedor.innerHTML = `
+        const contenido = (
+
+          vehiculo.marca +
+          " " +
+          vehiculo.modelo +
+          " " +
+          vehiculo.version +
+          " " +
+          vehiculo.categoria
+
+        ).toLowerCase();
+
+
+        return contenido.includes(texto);
+
+      });
+
+  }
+
+
+  catalogo.innerHTML = "";
+
+
+  if (vehiculos.length === 0) {
+
+    catalogo.innerHTML = `
 
       <div class="sin-resultados">
 
-        <h3>
-          No encontramos vehículos
-        </h3>
+        <h3>No encontramos vehículos</h3>
 
         <p>
-          Intenta con otra búsqueda.
+          Intenta cambiar la búsqueda o categoría.
         </p>
 
       </div>
@@ -202,116 +298,134 @@ function mostrarVehiculos() {
   }
 
 
-  filtrados.forEach(
-    vehiculo => {
+  vehiculos.forEach(function (vehiculo) {
 
-      const tarjeta =
-        document.createElement(
-          "article"
-        );
+    catalogo.appendChild(
+      crearTarjetaVehiculo(vehiculo)
+    );
 
-
-      tarjeta.className =
-        "vehiculo-card";
-
-
-      tarjeta.innerHTML = `
-
-        <div class="vehiculo-imagen">
-
-          <img
-            src="${vehiculo.imagen}"
-            alt="${vehiculo.marca} ${vehiculo.modelo}"
-            onerror="this.style.display='none'"
-          >
-
-          <div class="imagen-placeholder">
-            🚗
-          </div>
-
-        </div>
-
-
-        <div class="vehiculo-info">
-
-          <span class="marca">
-            ${vehiculo.marca}
-          </span>
-
-
-          <h3>
-            ${vehiculo.modelo}
-          </h3>
-
-
-          <p class="version">
-            ${vehiculo.version}
-          </p>
-
-
-          <div class="precio">
-
-            <small>
-              Desde
-            </small>
-
-            ${formatoPrecio(
-              vehiculo.precio
-            )}
-
-          </div>
-
-
-          <div class="card-botones">
-
-            <button
-              class="btn-secundario-card"
-              onclick="
-                verVehiculo('${vehiculo.id}')
-              "
-            >
-              Ver vehículo
-            </button>
-
-
-            <button
-              class="btn-principal-card"
-              onclick="
-                abrirCotizadorVehiculo(
-                  '${vehiculo.id}'
-                )
-              "
-            >
-              Cotizar
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      contenedor.appendChild(
-        tarjeta
-      );
-
-    }
-  );
+  });
 
 }
 
 
-/* =====================================================
-   VER VEHÍCULO
-===================================================== */
+/* =========================================================
+   CREAR TARJETA DE VEHÍCULO
+========================================================= */
 
-function verVehiculo(id) {
+function crearTarjetaVehiculo(vehiculo) {
+
+  const tarjeta =
+    document.createElement("article");
+
+
+  tarjeta.className =
+    "tarjeta-vehiculo";
+
+
+  tarjeta.innerHTML = `
+
+    <div class="vehiculo-imagen-contenedor">
+
+      <img
+        class="vehiculo-imagen"
+        src="${vehiculo.imagen}"
+        alt="${vehiculo.marca} ${vehiculo.modelo}"
+      >
+
+      ${
+        vehiculo.destacado
+        ?
+        `<span class="vehiculo-destacado">
+          Destacado
+        </span>`
+        :
+        ""
+      }
+
+    </div>
+
+
+    <div class="vehiculo-info">
+
+      <span class="vehiculo-categoria">
+        ${vehiculo.categoria}
+      </span>
+
+
+      <small class="vehiculo-marca">
+        ${vehiculo.marca}
+      </small>
+
+
+      <h3>
+        ${vehiculo.modelo}
+      </h3>
+
+
+      <p class="vehiculo-version">
+        ${vehiculo.version}
+      </p>
+
+
+      <p class="vehiculo-descripcion">
+        ${vehiculo.descripcion || ""}
+      </p>
+
+
+      <div class="vehiculo-precio">
+
+        <small>
+          Desde
+        </small>
+
+        <strong>
+          ${formatoMoneda(vehiculo.precio)}
+        </strong>
+
+      </div>
+
+
+      <button
+        class="btn-principal btn-ancho"
+        onclick="abrirVehiculo('${vehiculo.id}')"
+      >
+        Ver vehículo
+      </button>
+
+    </div>
+
+  `;
+
+
+  const imagen =
+    tarjeta.querySelector(".vehiculo-imagen");
+
+
+  if (imagen) {
+
+    imagen.onerror = function () {
+
+      this.style.display = "none";
+
+    };
+
+  }
+
+
+  return tarjeta;
+
+}
+
+
+/* =========================================================
+   DETALLE DEL VEHÍCULO
+========================================================= */
+
+function abrirVehiculo(id) {
 
   const vehiculo =
-    VEHICULOS.find(
-      item => item.id === id
-    );
+    obtenerVehiculo(id);
 
 
   if (!vehiculo) return;
@@ -322,42 +436,29 @@ function verVehiculo(id) {
 
 
   registrarInteraccion(
-    "vista_vehiculo",
+    "vehiculo",
     vehiculo
   );
 
 
-  document.getElementById(
-    "detalleImagen"
-  ).src =
-    vehiculo.imagen;
+  const modal =
+    document.getElementById("modalVehiculo");
 
 
-  document.getElementById(
-    "detalleMarca"
-  ).textContent =
-    vehiculo.marca;
+  const imagen =
+    document.getElementById("detalleImagen");
 
+  const marca =
+    document.getElementById("detalleMarca");
 
-  document.getElementById(
-    "detalleModelo"
-  ).textContent =
-    vehiculo.modelo;
+  const modelo =
+    document.getElementById("detalleModelo");
 
+  const version =
+    document.getElementById("detalleVersion");
 
-  document.getElementById(
-    "detalleVersion"
-  ).textContent =
-    vehiculo.version;
-
-
-  document.getElementById(
-    "detallePrecio"
-  ).textContent =
-    formatoPrecio(
-      vehiculo.precio
-    );
-
+  const precio =
+    document.getElementById("detallePrecio");
 
   const caracteristicas =
     document.getElementById(
@@ -365,168 +466,344 @@ function verVehiculo(id) {
     );
 
 
-  caracteristicas.innerHTML = `
+  if (imagen) {
 
-    <div>
-      <small>Motor</small>
-      <strong>
-        ${vehiculo.caracteristicas.motor}
-      </strong>
-    </div>
+    imagen.src =
+      vehiculo.imagen;
 
-    <div>
-      <small>Transmisión</small>
-      <strong>
-        ${vehiculo.caracteristicas.transmision}
-      </strong>
-    </div>
+    imagen.alt =
+      vehiculo.marca +
+      " " +
+      vehiculo.modelo;
 
-    <div>
-      <small>Pasajeros</small>
-      <strong>
-        ${vehiculo.caracteristicas.pasajeros}
-      </strong>
-    </div>
+    imagen.onerror = function () {
 
-    <div>
-      <small>Combustible</small>
-      <strong>
-        ${vehiculo.caracteristicas.combustible}
-      </strong>
-    </div>
+      this.style.display = "none";
 
-  `;
+    };
+
+  }
 
 
-  abrirModal(
-    "modalVehiculo"
-  );
+  if (marca) {
+
+    marca.textContent =
+      vehiculo.marca;
+
+  }
+
+
+  if (modelo) {
+
+    modelo.textContent =
+      vehiculo.modelo;
+
+  }
+
+
+  if (version) {
+
+    version.textContent =
+      vehiculo.version;
+
+  }
+
+
+  if (precio) {
+
+    precio.textContent =
+      formatoMoneda(
+        vehiculo.precio
+      );
+
+  }
+
+
+  if (caracteristicas) {
+
+    caracteristicas.innerHTML = "";
+
+
+    if (
+      vehiculo.caracteristicas &&
+      vehiculo.caracteristicas.length
+    ) {
+
+      vehiculo.caracteristicas.forEach(
+        function (caracteristica) {
+
+          const elemento =
+            document.createElement("div");
+
+
+          elemento.className =
+            "caracteristica";
+
+
+          elemento.textContent =
+            "✓ " + caracteristica;
+
+
+          caracteristicas.appendChild(
+            elemento
+          );
+
+        }
+      );
+
+    }
+
+  }
+
+
+  if (modal) {
+
+    modal.classList.add("activo");
+
+  }
 
 }
 
 
-/* =====================================================
-   SELECTS
-===================================================== */
+/* =========================================================
+   CERRAR MODALES
+========================================================= */
 
-function cargarSelects() {
+function cerrarModal(id) {
 
-  const cotizador =
+  const modal =
+    document.getElementById(id);
+
+
+  if (modal) {
+
+    modal.classList.remove("activo");
+
+  }
+
+}
+
+
+/* =========================================================
+   COTIZADOR
+========================================================= */
+
+function cargarSelectores() {
+
+  const selector =
     document.getElementById(
       "cotizadorModelo"
     );
 
 
-  const prueba =
+  const selectorPrueba =
     document.getElementById(
       "pruebaModelo"
     );
 
 
-  VEHICULOS.forEach(
-    vehiculo => {
+  const vehiculos =
+    obtenerVehiculosDisponibles();
 
-      const opcion1 =
-        document.createElement(
-          "option"
+
+  if (selector) {
+
+    selector.innerHTML = "";
+
+
+    vehiculos.forEach(
+      function (vehiculo) {
+
+        const opcion =
+          document.createElement("option");
+
+
+        opcion.value =
+          vehiculo.id;
+
+
+        opcion.textContent =
+          vehiculo.marca +
+          " " +
+          vehiculo.modelo;
+
+
+        selector.appendChild(
+          opcion
         );
 
+      }
+    );
 
-      opcion1.value =
-        vehiculo.id;
-
-
-      opcion1.textContent =
-        `${vehiculo.marca} ${vehiculo.modelo}`;
+  }
 
 
-      cotizador.appendChild(
-        opcion1
-      );
+  if (selectorPrueba) {
+
+    selectorPrueba.innerHTML = "";
 
 
-      const opcion2 =
-        opcion1.cloneNode(true);
+    vehiculos.forEach(
+      function (vehiculo) {
+
+        const opcion =
+          document.createElement("option");
 
 
-      prueba.appendChild(
-        opcion2
-      );
+        opcion.value =
+          vehiculo.id;
 
-    }
-  );
+
+        opcion.textContent =
+          vehiculo.marca +
+          " " +
+          vehiculo.modelo;
+
+
+        selectorPrueba.appendChild(
+          opcion
+        );
+
+      }
+    );
+
+  }
+
+
+  if (
+    vehiculos.length > 0 &&
+    selector
+  ) {
+
+    selector.value =
+      vehiculos[0].id;
+
+  }
 
 }
 
 
-/* =====================================================
-   COTIZADOR
-===================================================== */
+/* =========================================================
+   CALCULAR MENSUALIDAD
+========================================================= */
 
 function calcularMensualidad() {
 
-  const id =
+  const selector =
     document.getElementById(
       "cotizadorModelo"
-    ).value;
-
-
-  const vehiculo =
-    VEHICULOS.find(
-      item => item.id === id
     );
 
 
-  if (!vehiculo) return;
+  const engancheInput =
+    document.getElementById(
+      "cotizadorEnganche"
+    );
 
 
-  const enganche =
+  const plazoInput =
+    document.getElementById(
+      "cotizadorPlazo"
+    );
+
+
+  const resultado =
+    document.getElementById(
+      "mensualidad"
+    );
+
+
+  if (
+    !selector ||
+    !engancheInput ||
+    !plazoInput ||
+    !resultado
+  ) {
+
+    return;
+
+  }
+
+
+  const vehiculo =
+    obtenerVehiculo(
+      selector.value
+    );
+
+
+  if (!vehiculo) {
+
+    resultado.textContent =
+      "$0";
+
+    return;
+
+  }
+
+
+  let enganche =
     Number(
-      document.getElementById(
-        "cotizadorEnganche"
-      ).value
-    ) || 0;
+      engancheInput.value
+    );
 
 
   const plazo =
     Number(
-      document.getElementById(
-        "cotizadorPlazo"
-      ).value
+      plazoInput.value
     );
+
+
+  const precio =
+    Number(
+      vehiculo.precio
+    );
+
+
+  if (isNaN(enganche)) {
+
+    enganche = 0;
+
+  }
+
+
+  if (enganche < 0) {
+
+    enganche = 0;
+
+  }
+
+
+  if (enganche > precio) {
+
+    enganche = precio;
+
+  }
+
+
+  const montoFinanciado =
+    precio - enganche;
 
 
   const tasaAnual =
-    12.9;
-
-
-  const monto =
-    Math.max(
-      vehiculo.precio -
-      enganche,
-      0
-    );
+    Number(
+      CONFIG.cotizador.tasaAnual
+    ) || 0;
 
 
   const tasaMensual =
-    tasaAnual /
-    100 /
-    12;
+    tasaAnual / 100 / 12;
 
 
-  let mensualidad;
+  let mensualidad = 0;
 
 
   if (
-    monto <= 0
+    tasaMensual > 0 &&
+    montoFinanciado > 0
   ) {
 
-    mensualidad = 0;
-
-  } else {
-
     mensualidad =
-      monto *
+      montoFinanciado *
       (
         tasaMensual *
         Math.pow(
@@ -541,13 +818,19 @@ function calcularMensualidad() {
         ) - 1
       );
 
+  } else if (
+    montoFinanciado > 0
+  ) {
+
+    mensualidad =
+      montoFinanciado /
+      plazo;
+
   }
 
 
-  document.getElementById(
-    "mensualidad"
-  ).textContent =
-    formatoPrecio(
+  resultado.textContent =
+    formatoMoneda(
       Math.round(
         mensualidad
       )
@@ -556,55 +839,52 @@ function calcularMensualidad() {
 }
 
 
-/* =====================================================
-   ABRIR COTIZADOR
-===================================================== */
+/* =========================================================
+   IR AL COTIZADOR
+========================================================= */
 
 function abrirCotizador() {
 
-  document.getElementById(
-    "cotizador"
-  ).scrollIntoView({
-    behavior: "smooth"
-  });
+  const seccion =
+    document.getElementById(
+      "cotizador"
+    );
+
+
+  if (seccion) {
+
+    seccion.scrollIntoView({
+
+      behavior: "smooth"
+
+    });
+
+  }
 
 }
 
 
-function abrirCotizadorVehiculo(id) {
-
-  document.getElementById(
-    "cotizadorModelo"
-  ).value = id;
-
-
-  calcularMensualidad();
-
-
-  document.getElementById(
-    "cotizador"
-  ).scrollIntoView({
-    behavior: "smooth"
-  });
-
-
-  registrarInteraccion(
-    "inicio_cotizacion",
-    VEHICULOS.find(
-      item => item.id === id
-    )
-  );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    COTIZAR VEHÍCULO ACTUAL
-===================================================== */
+========================================================= */
 
 function cotizarVehiculoActual() {
 
   if (!vehiculoActual) return;
+
+
+  const selector =
+    document.getElementById(
+      "cotizadorModelo"
+    );
+
+
+  if (selector) {
+
+    selector.value =
+      vehiculoActual.id;
+
+  }
 
 
   cerrarModal(
@@ -612,135 +892,148 @@ function cotizarVehiculoActual() {
   );
 
 
-  abrirCotizadorVehiculo(
-    vehiculoActual.id
-  );
+  abrirCotizador();
+
+
+  calcularMensualidad();
 
 }
 
 
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-function contactarWhatsApp() {
-
-  registrarInteraccion(
-    "click_whatsapp"
-  );
-
-
-  const mensaje =
-    `Hola ${CONFIG.vendedor}, vi su página de vehículos y me gustaría recibir información.`;
-
-
-  abrirWhatsApp(
-    mensaje
-  );
-
-}
-
-
-function contactarVehiculo() {
-
-  if (!vehiculoActual) return;
-
-
-  registrarInteraccion(
-    "whatsapp_vehiculo",
-    vehiculoActual
-  );
-
-
-  const mensaje =
-    `Hola ${CONFIG.vendedor}, me interesa el ${vehiculoActual.marca} ${vehiculoActual.modelo} ${vehiculoActual.version}.`;
-
-
-  abrirWhatsApp(
-    mensaje
-  );
-
-}
-
+/* =========================================================
+   BOTÓN "ME INTERESA ESTA COTIZACIÓN"
+========================================================= */
 
 function enviarCotizacion() {
 
-  const id =
+  const selector =
     document.getElementById(
       "cotizadorModelo"
-    ).value;
+    );
+
+
+  const engancheInput =
+    document.getElementById(
+      "cotizadorEnganche"
+    );
+
+
+  const plazoInput =
+    document.getElementById(
+      "cotizadorPlazo"
+    );
+
+
+  if (!selector) return;
 
 
   const vehiculo =
-    VEHICULOS.find(
-      item => item.id === id
+    obtenerVehiculo(
+      selector.value
     );
+
+
+  if (!vehiculo) return;
 
 
   const enganche =
     Number(
-      document.getElementById(
-        "cotizadorEnganche"
-      ).value
+      engancheInput.value
     ) || 0;
 
 
   const plazo =
-    document.getElementById(
-      "cotizadorPlazo"
-    ).value;
-
-
-  const mensualidad =
-    document.getElementById(
-      "mensualidad"
-    ).textContent;
+    Number(
+      plazoInput.value
+    ) || 0;
 
 
   registrarInteraccion(
-    "cotizacion_whatsapp",
-    vehiculo,
+
+    "cotizacion",
+
     {
-      enganche,
-      plazo,
-      mensualidad
+
+      vehiculo: vehiculo,
+
+      enganche: enganche,
+
+      plazo: plazo
+
     }
+
   );
 
 
-  const mensaje =
-    `Hola ${CONFIG.vendedor}.
-
-Me interesa el ${vehiculo.marca} ${vehiculo.modelo}.
-
-Precio:
-${formatoPrecio(vehiculo.precio)}
-
-Enganche:
-${formatoPrecio(enganche)}
-
-Plazo:
-${plazo} meses
-
-Mensualidad aproximada:
-${mensualidad}
-
-Me gustaría recibir más información.`;
-
-
-  abrirWhatsApp(
-    mensaje
-  );
+  abrirContacto();
 
 }
 
 
-function abrirWhatsApp(
-  mensaje
-) {
+/* =========================================================
+   CONTACTO
+========================================================= */
+
+function abrirContacto() {
+
+  const modal =
+    document.getElementById(
+      "modalContacto"
+    );
+
+
+  if (modal) {
+
+    modal.classList.add("activo");
+
+  }
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function contactarWhatsApp() {
+
+  const telefono =
+    CONFIG.vendedor.whatsapp ||
+    CONFIG.agencia.whatsapp;
+
+
+  if (!telefono) return;
+
+
+  let mensaje =
+    "Hola, me interesa conocer los vehículos disponibles.";
+
+
+  if (vehiculoActual) {
+
+    mensaje =
+      "Hola, me interesa el " +
+      vehiculoActual.marca +
+      " " +
+      vehiculoActual.modelo +
+      ".";
+
+  }
+
 
   const url =
-    `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+    "https://wa.me/" +
+    telefono +
+    "?text=" +
+    encodeURIComponent(
+      mensaje
+    );
+
+
+  registrarInteraccion(
+    "whatsapp",
+    vehiculoActual
+  );
 
 
   window.open(
@@ -751,139 +1044,235 @@ function abrirWhatsApp(
 }
 
 
-/* =====================================================
+/* =========================================================
+   WHATSAPP DESDE VEHÍCULO
+========================================================= */
+
+function contactarVehiculo() {
+
+  contactarWhatsApp();
+
+}
+
+
+/* =========================================================
+   LLAMAR AL VENDEDOR
+========================================================= */
+
+function llamarVendedor() {
+
+  const telefono =
+    CONFIG.vendedor.telefono ||
+    CONFIG.agencia.telefono;
+
+
+  if (!telefono) return;
+
+
+  registrarInteraccion(
+    "llamada",
+    vehiculoActual
+  );
+
+
+  window.location.href =
+    "tel:" + telefono;
+
+}
+
+
+/* =========================================================
    PRUEBA DE MANEJO
-===================================================== */
+========================================================= */
 
 function abrirPruebaManejo() {
 
-  cerrarModal(
-    "modalVehiculo"
-  );
+  const modal =
+    document.getElementById(
+      "modalPrueba"
+    );
 
 
-  abrirModal(
-    "modalPrueba"
-  );
-
-
-  if (vehiculoActual) {
-
+  const selector =
     document.getElementById(
       "pruebaModelo"
-    ).value =
+    );
+
+
+  if (
+    selector &&
+    vehiculoActual
+  ) {
+
+    selector.value =
       vehiculoActual.id;
+
+  }
+
+
+  if (modal) {
+
+    modal.classList.add("activo");
 
   }
 
 }
 
+
+/* =========================================================
+   SOLICITAR PRUEBA
+========================================================= */
 
 function solicitarPrueba() {
 
   const nombre =
     document.getElementById(
       "nombrePrueba"
-    ).value.trim();
+    );
 
 
   const telefono =
     document.getElementById(
       "telefonoPrueba"
-    ).value.trim();
+    );
 
 
-  const id =
+  const selector =
     document.getElementById(
       "pruebaModelo"
-    ).value;
-
-
-  const vehiculo =
-    VEHICULOS.find(
-      item => item.id === id
     );
 
 
   if (
     !nombre ||
-    !telefono
+    !telefono ||
+    !selector
   ) {
-
-    alert(
-      "Completa tu nombre y teléfono para solicitar la prueba."
-    );
 
     return;
 
   }
 
 
+  const nombreValor =
+    nombre.value.trim();
+
+
+  const telefonoValor =
+    telefono.value.trim();
+
+
+  if (!nombreValor) {
+
+    alert(
+      "Por favor escribe tu nombre."
+    );
+
+    nombre.focus();
+
+    return;
+
+  }
+
+
+  if (!telefonoValor) {
+
+    alert(
+      "Por favor escribe tu teléfono."
+    );
+
+    telefono.focus();
+
+    return;
+
+  }
+
+
+  const vehiculo =
+    obtenerVehiculo(
+      selector.value
+    );
+
+
   registrarInteraccion(
-    "solicitud_prueba",
-    vehiculo,
+
+    "prueba_manejo",
+
     {
-      nombre,
-      telefono
+
+      nombre:
+        nombreValor,
+
+      telefono:
+        telefonoValor,
+
+      vehiculo:
+        vehiculo
+
     }
+
   );
 
 
-  const mensaje =
-    `Hola ${CONFIG.vendedor}.
-
-Quiero solicitar una prueba de manejo.
-
-Nombre:
-${nombre}
-
-Teléfono:
-${telefono}
-
-Vehículo:
-${vehiculo.marca} ${vehiculo.modelo}`;
+  const numero =
+    CONFIG.vendedor.whatsapp ||
+    CONFIG.agencia.whatsapp;
 
 
-  abrirWhatsApp(
-    mensaje
+  let mensaje =
+    "Hola, quiero solicitar una prueba de manejo.";
+
+  
+  mensaje +=
+    "\nNombre: " +
+    nombreValor;
+
+
+  mensaje +=
+    "\nTeléfono: " +
+    telefonoValor;
+
+
+  if (vehiculo) {
+
+    mensaje +=
+      "\nVehículo: " +
+      vehiculo.marca +
+      " " +
+      vehiculo.modelo;
+
+  }
+
+
+  if (numero) {
+
+    const url =
+      "https://wa.me/" +
+      numero +
+      "?text=" +
+      encodeURIComponent(
+        mensaje
+      );
+
+
+    window.open(
+      url,
+      "_blank"
+    );
+
+  }
+
+
+  cerrarModal(
+    "modalPrueba"
   );
 
 }
 
 
-/* =====================================================
-   LLAMADA
-===================================================== */
-
-function llamarVendedor() {
-
-  registrarInteraccion(
-    "click_llamada"
-  );
-
-
-  window.location.href =
-    `tel:+${CONFIG.telefono}`;
-
-}
-
-
-/* =====================================================
-   CONTACTO
-===================================================== */
-
-function abrirContacto() {
-
-  abrirModal(
-    "modalContacto"
-  );
-
-}
-
-
-/* =====================================================
-   MENÚ
-===================================================== */
+/* =========================================================
+   MENÚ MÓVIL
+========================================================= */
 
 function abrirMenu() {
 
@@ -893,6 +1282,9 @@ function abrirMenu() {
     );
 
 
+  if (!menu) return;
+
+
   menu.classList.toggle(
     "menu-abierto"
   );
@@ -900,239 +1292,315 @@ function abrirMenu() {
 }
 
 
-/* =====================================================
-   MODALES
-===================================================== */
-
-function abrirModal(id) {
-
-  document
-    .getElementById(id)
-    .classList.add(
-      "activo"
-    );
-
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
-
-function cerrarModal(id) {
-
-  document
-    .getElementById(id)
-    .classList.remove(
-      "activo"
-    );
-
-
-  document.body.style.overflow =
-    "";
-
-}
-
-
-/* =====================================================
-   EVENTOS
-===================================================== */
-
-function configurarEventos() {
-
-  document.getElementById(
-    "buscarModelo"
-  ).addEventListener(
-    "input",
-    mostrarVehiculos
-  );
-
-
-  document.getElementById(
-    "filtroCategoria"
-  ).addEventListener(
-    "change",
-    function() {
-
-      categoriaActual =
-        this.value;
-
-      actualizarPestanas();
-
-      mostrarVehiculos();
-
-    }
-  );
-
-
-  document.getElementById(
-    "cotizadorModelo"
-  ).addEventListener(
-    "change",
-    calcularMensualidad
-  );
-
-
-  document.getElementById(
-    "cotizadorEnganche"
-  ).addEventListener(
-    "input",
-    calcularMensualidad
-  );
-
-
-  document.getElementById(
-    "cotizadorPlazo"
-  ).addEventListener(
-    "change",
-    calcularMensualidad
-  );
-
-
-  document
-    .querySelectorAll(
-      ".pestana"
-    )
-    .forEach(
-      boton => {
-
-        boton.addEventListener(
-          "click",
-          function() {
-
-            categoriaActual =
-              this.dataset.categoria;
-
-
-            actualizarPestanas();
-
-            document.getElementById(
-              "filtroCategoria"
-            ).value =
-              categoriaActual;
-
-
-            mostrarVehiculos();
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   PESTAÑAS
-===================================================== */
-
-function actualizarPestanas() {
-
-  document
-    .querySelectorAll(
-      ".pestana"
-    )
-    .forEach(
-      boton => {
-
-        boton.classList.toggle(
-          "activa",
-          boton.dataset.categoria ===
-            categoriaActual
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   SCROLL MODELOS
-===================================================== */
+/* =========================================================
+   IR A MODELOS
+========================================================= */
 
 function irAModelos() {
 
-  document.getElementById(
-    "modelos"
-  ).scrollIntoView({
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =====================================================
-   FORMATO
-===================================================== */
-
-function formatoPrecio(
-  numero
-) {
-
-  return new Intl.NumberFormat(
-    "es-MX",
-    {
-      style: "currency",
-      currency: "MXN",
-      maximumFractionDigits: 0
-    }
-  ).format(numero);
-
-}
-
-
-/* =====================================================
-   REGISTRO DE INTERACCIONES
-
-   POR AHORA DEMO.
-   DESPUÉS → FIREBASE.
-
-   El cliente NO necesita registrarse.
-===================================================== */
-
-function registrarInteraccion(
-  tipo,
-  vehiculo = null,
-  datos = {}
-) {
-
-  const registro = {
-
-    tipo,
-
-    vehiculo:
-      vehiculo
-        ? vehiculo.id
-        : null,
-
-    datos,
-
-    fecha:
-      new Date().toISOString()
-
-  };
-
-
-  const historial =
-    JSON.parse(
-      localStorage.getItem(
-        "interaccionesDemo"
-      ) || "[]"
+  const modelos =
+    document.getElementById(
+      "modelos"
     );
 
 
-  historial.push(
-    registro
+  if (modelos) {
+
+    modelos.scrollIntoView({
+
+      behavior: "smooth"
+
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+function configurarEventos() {
+
+  const buscador =
+    document.getElementById(
+      "buscarModelo"
+    );
+
+
+  if (buscador) {
+
+    buscador.addEventListener(
+      "input",
+      function () {
+
+        cargarCatalogo();
+
+      }
+    );
+
+  }
+
+
+  const filtro =
+    document.getElementById(
+      "filtroCategoria"
+    );
+
+
+  if (filtro) {
+
+    filtro.addEventListener(
+      "change",
+      function () {
+
+        categoriaActual =
+          this.value;
+
+        actualizarPestanas();
+
+        cargarCatalogo();
+
+      }
+    );
+
+  }
+
+
+  const pestanas =
+    document.querySelectorAll(
+      ".pestana"
+    );
+
+
+  pestanas.forEach(
+    function (pestana) {
+
+      pestana.addEventListener(
+        "click",
+        function () {
+
+          categoriaActual =
+            this.dataset.categoria || "";
+
+
+          const filtro =
+            document.getElementById(
+              "filtroCategoria"
+            );
+
+
+          if (filtro) {
+
+            filtro.value =
+              categoriaActual;
+
+          }
+
+
+          actualizarPestanas();
+
+          cargarCatalogo();
+
+        }
+      );
+
+    }
   );
 
 
-  localStorage.setItem(
-    "interaccionesDemo",
-    JSON.stringify(
-      historial
-    )
+  const cotizadorModelo =
+    document.getElementById(
+      "cotizadorModelo"
+    );
+
+
+  const cotizadorEnganche =
+    document.getElementById(
+      "cotizadorEnganche"
+    );
+
+
+  const cotizadorPlazo =
+    document.getElementById(
+      "cotizadorPlazo"
+    );
+
+
+  if (cotizadorModelo) {
+
+    cotizadorModelo.addEventListener(
+      "change",
+      calcularMensualidad
+    );
+
+  }
+
+
+  if (cotizadorEnganche) {
+
+    cotizadorEnganche.addEventListener(
+      "input",
+      calcularMensualidad
+    );
+
+  }
+
+
+  if (cotizadorPlazo) {
+
+    cotizadorPlazo.addEventListener(
+      "change",
+      calcularMensualidad
+    );
+
+  }
+
+
+  /* CERRAR MODALES TOCANDO EL FONDO */
+
+  document.querySelectorAll(
+    ".modal"
+  ).forEach(
+    function (modal) {
+
+      modal.addEventListener(
+        "click",
+        function (evento) {
+
+          if (
+            evento.target === modal
+          ) {
+
+            modal.classList.remove(
+              "activo"
+            );
+
+          }
+
+        }
+      );
+
+    }
   );
 
 }
+
+
+/* =========================================================
+   ACTUALIZAR PESTAÑAS
+========================================================= */
+
+function actualizarPestanas() {
+
+  const pestanas =
+    document.querySelectorAll(
+      ".pestana"
+    );
+
+
+  pestanas.forEach(
+    function (pestana) {
+
+      const categoria =
+        pestana.dataset.categoria || "";
+
+
+      pestana.classList.toggle(
+
+        "activa",
+
+        categoria === categoriaActual
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   REGISTRO BÁSICO DE INTERACCIONES
+=========================================================
+
+   IMPORTANTE:
+
+   Esto es temporal.
+
+   Más adelante esta función enviará los datos
+   directamente a Firebase.
+
+   Así podremos mostrar en el panel del vendedor:
+
+   - Visitas
+   - Modelos vistos
+   - Cotizaciones
+   - Enganches
+   - WhatsApp
+   - Pruebas de manejo
+   - Llamadas
+
+========================================================= */
+
+function registrarInteraccion(
+  tipo,
+  datos
+) {
+
+  try {
+
+    const registros =
+      JSON.parse(
+        localStorage.getItem(
+          "interaccionesVendedoresAutos"
+        )
+      ) || [];
+
+
+    registros.push({
+
+      tipo:
+        tipo,
+
+      fecha:
+        new Date().toISOString(),
+
+      datos:
+        datos || null
+
+    });
+
+
+    localStorage.setItem(
+
+      "interaccionesVendedoresAutos",
+
+      JSON.stringify(
+        registros
+      )
+
+    );
+
+  } catch (error) {
+
+    console.log(
+      "No se pudo registrar la interacción."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   REGISTRAR VISITA
+========================================================= */
+
+registrarInteraccion(
+  "visita",
+  {
+    pagina: "publica"
+  }
+);
