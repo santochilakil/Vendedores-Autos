@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Página del vendedor</title>
+
 
     <style>
 
@@ -36,18 +43,23 @@
 
 
         /* =====================================================
-           BARRA SUPERIOR DEL VENDEDOR
+           BARRA SUPERIOR
         ===================================================== */
 
         .barra-vendedor {
+
             position: fixed;
+
             top: 0;
             left: 0;
+
             width: 100%;
             height: 68px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             padding: 8px 15px;
@@ -59,13 +71,21 @@
             z-index: 1000;
         }
 
+
         .informacion-vendedor {
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
+
+            min-width: 0;
         }
 
+
         .foto-mini {
+
             width: 45px;
             height: 45px;
 
@@ -74,29 +94,58 @@
             object-fit: cover;
 
             border: 2px solid white;
+
+            flex-shrink: 0;
         }
+
 
         .nombre-mini {
+
             font-size: 14px;
+
             font-weight: bold;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
         }
+
 
         .agencia-mini {
+
             font-size: 11px;
+
             opacity: 0.8;
+
             margin-top: 3px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
         }
+
 
         .botones-superiores {
+
             display: flex;
+
             gap: 7px;
+
+            flex-shrink: 0;
         }
 
+
         .boton-contacto {
+
             width: 38px;
             height: 38px;
 
             border: none;
+
             border-radius: 50%;
 
             background: white;
@@ -104,36 +153,37 @@
             font-size: 17px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
         }
 
 
         /* =====================================================
-           PÁGINA DE BIENVENIDA
+           BIENVENIDA
         ===================================================== */
 
         .bienvenida {
+
             min-height: 100vh;
 
             padding: 100px 20px 50px;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
 
             text-align: center;
 
-            background-image:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.48),
-                    rgba(0, 0, 0, 0.72)
-                ),
-                url("fondo-bienvenida.jpg");
-
             background-size: cover;
+
             background-position: center;
+
             background-repeat: no-repeat;
         }
 
@@ -143,7 +193,9 @@
         ===================================================== */
 
         .logo-marca {
+
             width: 150px;
+
             max-width: 60%;
 
             margin-bottom: 22px;
@@ -153,10 +205,11 @@
 
 
         /* =====================================================
-           FOTO DEL VENDEDOR
+           FOTO VENDEDOR
         ===================================================== */
 
         .foto-vendedor {
+
             width: 120px;
             height: 120px;
 
@@ -171,18 +224,23 @@
 
 
         /* =====================================================
-           NOMBRE DEL VENDEDOR
+           INFORMACIÓN
         ===================================================== */
 
         .bienvenida h1 {
+
             font-size: 32px;
+
             font-weight: 800;
 
             margin-bottom: 7px;
         }
 
+
         .puesto {
+
             font-size: 17px;
+
             opacity: 0.9;
 
             margin-bottom: 22px;
@@ -190,14 +248,17 @@
 
 
         /* =====================================================
-           MENSAJE PRINCIPAL
+           MENSAJES
         ===================================================== */
 
         .mensaje-principal {
+
             width: 100%;
+
             max-width: 520px;
 
             font-size: 25px;
+
             line-height: 1.25;
 
             font-weight: 800;
@@ -205,11 +266,15 @@
             margin-bottom: 14px;
         }
 
+
         .mensaje-secundario {
+
             width: 100%;
+
             max-width: 470px;
 
             font-size: 15px;
+
             line-height: 1.5;
 
             opacity: 0.9;
@@ -223,24 +288,58 @@
         ===================================================== */
 
         .promocion {
-            width: 100%;
-            max-width: 520px;
 
-            padding: 18px;
+            width: 100%;
+
+            max-width: 540px;
+
+            padding: 25px 20px;
 
             margin-bottom: 28px;
 
-            border-radius: 17px;
+            border-radius: 18px;
 
-            background: rgba(0, 0, 0, 0.72);
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            position: relative;
+
+            overflow: hidden;
 
             border: 1px solid rgba(255,255,255,0.35);
 
             box-shadow:
-                0 10px 35px rgba(0,0,0,0.35);
+                0 10px 35px rgba(0,0,0,0.40);
         }
 
+
+        .promocion::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.48);
+
+            z-index: 0;
+        }
+
+
+        .promocion-contenido {
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
         .promocion-etiqueta {
+
             font-size: 11px;
 
             text-transform: uppercase;
@@ -249,10 +348,12 @@
 
             margin-bottom: 8px;
 
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
+
         .promocion-titulo {
+
             font-size: 23px;
 
             font-weight: 800;
@@ -260,7 +361,9 @@
             margin-bottom: 8px;
         }
 
+
         .promocion-detalle {
+
             font-size: 16px;
 
             font-weight: bold;
@@ -272,6 +375,7 @@
         ===================================================== */
 
         .boton-siguiente {
+
             border: none;
 
             padding: 15px 48px;
@@ -292,7 +396,9 @@
             transition: transform 0.2s;
         }
 
+
         .boton-siguiente:hover {
+
             transform: scale(1.04);
         }
 
@@ -302,26 +408,25 @@
         ===================================================== */
 
         .pagina-principal {
+
             display: none;
 
             min-height: 100vh;
 
             padding: 105px 20px 45px;
 
-            background-image:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.58),
-                    rgba(0, 0, 0, 0.82)
-                ),
-                url("fondo-bienvenida.jpg");
-
             background-size: cover;
+
             background-position: center;
+
             background-repeat: no-repeat;
         }
 
+
         .contenido-principal {
+
             width: 100%;
+
             max-width: 600px;
 
             margin: 0 auto;
@@ -329,13 +434,17 @@
             text-align: center;
         }
 
+
         .contenido-principal h2 {
+
             font-size: 30px;
 
             margin-bottom: 10px;
         }
 
+
         .contenido-principal > p {
+
             font-size: 16px;
 
             opacity: 0.85;
@@ -345,10 +454,11 @@
 
 
         /* =====================================================
-           BOTONES PRINCIPALES
+           MENÚ
         ===================================================== */
 
         .menu-principal {
+
             display: grid;
 
             grid-template-columns: 1fr;
@@ -356,7 +466,9 @@
             gap: 18px;
         }
 
+
         .boton-menu {
+
             width: 100%;
 
             padding: 27px 20px;
@@ -377,7 +489,9 @@
                 0 8px 28px rgba(0,0,0,0.35);
         }
 
+
         .boton-menu span {
+
             display: block;
 
             margin-top: 7px;
@@ -395,6 +509,7 @@
         ===================================================== */
 
         .contacto-inferior {
+
             margin-top: 40px;
 
             padding: 18px;
@@ -404,21 +519,29 @@
             background: rgba(0,0,0,0.65);
         }
 
+
         .contacto-inferior p {
+
             font-size: 14px;
 
             margin-bottom: 13px;
         }
 
+
         .botones-inferiores {
+
             display: flex;
 
             justify-content: center;
 
             gap: 10px;
+
+            flex-wrap: wrap;
         }
 
+
         .boton-inferior {
+
             border: none;
 
             padding: 11px 18px;
@@ -440,23 +563,32 @@
         @media (max-width: 500px) {
 
             .bienvenida h1 {
+
                 font-size: 28px;
             }
 
+
             .mensaje-principal {
+
                 font-size: 21px;
             }
 
+
             .promocion-titulo {
+
                 font-size: 20px;
             }
 
+
             .boton-menu {
+
                 font-size: 21px;
             }
+
         }
 
     </style>
+
 </head>
 
 
@@ -474,7 +606,7 @@
             <img
                 id="fotoMini"
                 class="foto-mini"
-                src="vendedor.jpg"
+                src=""
                 alt="Foto del vendedor"
             >
 
@@ -483,16 +615,12 @@
                 <div
                     id="nombreMini"
                     class="nombre-mini"
-                >
-                    Nombre del vendedor
-                </div>
+                ></div>
 
                 <div
                     id="agenciaMini"
                     class="agencia-mini"
-                >
-                    Nombre de la agencia
-                </div>
+                ></div>
 
             </div>
 
@@ -508,6 +636,7 @@
             >
                 💬
             </button>
+
 
             <button
                 class="boton-contacto"
@@ -535,7 +664,7 @@
         <img
             id="logoMarca"
             class="logo-marca"
-            src="logo-marca.png"
+            src=""
             alt="Logo de la agencia"
         >
 
@@ -543,61 +672,63 @@
         <img
             id="fotoVendedor"
             class="foto-vendedor"
-            src="vendedor.jpg"
-            alt="Vendedor"
+            src=""
+            alt="Foto del vendedor"
         >
 
 
-        <h1 id="nombreVendedor">
-            Nombre del vendedor
-        </h1>
+        <h1 id="nombreVendedor"></h1>
 
 
         <div
             id="puestoVendedor"
             class="puesto"
-        >
-            Asesor de ventas
-        </div>
+        ></div>
 
 
         <div
             id="mensajePrincipal"
             class="mensaje-principal"
-        >
-            Atención personalizada para encontrar el auto ideal para ti.
-        </div>
+        ></div>
 
 
         <div
             id="mensajeSecundario"
             class="mensaje-secundario"
+        ></div>
+
+
+        <!-- =================================================
+             PROMOCIÓN
+             
+             SI NO EXISTE INFORMACIÓN,
+             ESTE BLOQUE SE OCULTA AUTOMÁTICAMENTE.
+        ================================================== -->
+
+        <div
+            id="promocion"
+            class="promocion"
+            style="display: none;"
         >
-            Conoce nuestros modelos, consulta precios y encuentra la opción
-            que mejor se adapte a tus necesidades.
-        </div>
+
+            <div class="promocion-contenido">
+
+                <div class="promocion-etiqueta">
+                    Promoción especial
+                </div>
 
 
-        <!-- PROMOCIÓN -->
+                <div
+                    id="tituloPromocion"
+                    class="promocion-titulo"
+                ></div>
 
-        <div class="promocion">
 
-            <div class="promocion-etiqueta">
-                Promoción especial
-            </div>
+                <div
+                    id="detallePromocion"
+                    class="promocion-detalle"
+                ></div>
 
-            <div
-                id="tituloPromocion"
-                class="promocion-titulo"
-            >
-                Promoción del mes
-            </div>
-
-            <div
-                id="detallePromocion"
-                class="promocion-detalle"
-            >
-                Consulta nuestras promociones vigentes.
             </div>
 
         </div>
@@ -629,6 +760,7 @@
                 Bienvenido
             </h2>
 
+
             <p>
                 Explora nuestros vehículos o calcula tu mensualidad.
             </p>
@@ -640,6 +772,7 @@
                     class="boton-menu"
                     onclick="abrirCatalogo()"
                 >
+
                     🚗 CATÁLOGO
 
                     <span>
@@ -653,6 +786,7 @@
                     class="boton-menu"
                     onclick="abrirCotizador()"
                 >
+
                     💰 COTIZAR
 
                     <span>
@@ -669,6 +803,7 @@
                 <p>
                     ¿Necesitas información?
                 </p>
+
 
                 <div class="botones-inferiores">
 
@@ -701,12 +836,32 @@
 
 
         /* =====================================================
-           CONFIGURACIÓN DE ESTA PÁGINA
+           IDENTIFICADOR DEL VENDEDOR
            
-           ESTA ES LA ZONA QUE MÁS ADELANTE ESTARÁ CONECTADA
-           CON FIREBASE Y LOS PANELES DE CONTROL.
+           ESTE DATO SERÁ MUY IMPORTANTE.
 
-           POR AHORA LOS DATOS SON DE PRUEBA.
+           MÁS ADELANTE VENDRÁ DEL ENLACE/QR Y FIREBASE.
+           
+           EJEMPLO:
+           
+           /juan-perez
+           
+           EL SISTEMA SABRÁ QUE DEBE CARGAR
+           LOS DATOS DE JUAN.
+        ===================================================== */
+
+
+        const vendedorId = obtenerVendedorId();
+
+
+
+        /* =====================================================
+           CONFIGURACIÓN TEMPORAL
+           
+           ESTO SOLO EXISTE MIENTRAS CONSTRUIMOS LA BASE.
+
+           MÁS ADELANTE ESTA INFORMACIÓN VENDRÁ
+           AUTOMÁTICAMENTE DESDE FIREBASE.
         ===================================================== */
 
 
@@ -714,51 +869,48 @@
 
             vendedor: {
 
-                nombre: "Nombre del vendedor",
+                nombre: "",
 
-                puesto: "Asesor de ventas",
+                puesto: "",
 
-                telefono: "9980000000",
+                telefono: "",
 
-                whatsapp: "529980000000"
+                whatsapp: "",
+
+                foto: ""
 
             },
 
 
             agencia: {
 
-                nombre: "Mitsubishi Cancún"
+                nombre: "",
+
+                logo: ""
 
             },
 
 
-            marca: {
+            pagina: {
 
-                logo: "logo-marca.png",
+                fondoBienvenida: "",
 
-                fondoBienvenida: "fondo-bienvenida.jpg"
+                mensajePrincipal: "",
 
-            },
-
-
-            bienvenida: {
-
-                titulo:
-                    "Atención personalizada para encontrar el auto ideal para ti.",
-
-                subtitulo:
-                    "Conoce nuestros modelos, consulta precios y encuentra la opción que mejor se adapte a tus necesidades."
+                mensajeSecundario: ""
 
             },
 
 
             promocion: {
 
-                titulo:
-                    "Promoción del mes",
+                activa: false,
 
-                detalle:
-                    "Consulta nuestras promociones vigentes."
+                titulo: "",
+
+                detalle: "",
+
+                fondo: ""
 
             }
 
@@ -767,13 +919,42 @@
 
 
         /* =====================================================
-           CARGAR CONFIGURACIÓN
+           OBTENER ID DEL VENDEDOR
+        ===================================================== */
+
+        function obtenerVendedorId() {
+
+            const parametros =
+                new URLSearchParams(window.location.search);
+
+
+            const id =
+                parametros.get("vendedor");
+
+
+            if (id) {
+
+                return id;
+
+            }
+
+
+            return null;
+
+        }
+
+
+
+        /* =====================================================
+           APLICAR CONFIGURACIÓN
         ===================================================== */
 
         function cargarConfiguracion() {
 
 
-            /* VENDEDOR */
+            /* -----------------------------------------------
+               VENDEDOR
+            ----------------------------------------------- */
 
             document.getElementById("nombreVendedor").textContent =
                 CONFIGURACION.vendedor.nombre;
@@ -787,54 +968,137 @@
                 CONFIGURACION.vendedor.puesto;
 
 
-            /* AGENCIA */
-
             document.getElementById("agenciaMini").textContent =
                 CONFIGURACION.agencia.nombre;
 
 
-            /* BIENVENIDA */
+
+            /* -----------------------------------------------
+               FOTO
+            ----------------------------------------------- */
+
+            if (CONFIGURACION.vendedor.foto) {
+
+                document.getElementById("fotoVendedor").src =
+                    CONFIGURACION.vendedor.foto;
+
+
+                document.getElementById("fotoMini").src =
+                    CONFIGURACION.vendedor.foto;
+
+            }
+
+
+
+            /* -----------------------------------------------
+               LOGO
+            ----------------------------------------------- */
+
+            if (CONFIGURACION.agencia.logo) {
+
+                document.getElementById("logoMarca").src =
+                    CONFIGURACION.agencia.logo;
+
+            }
+
+
+
+            /* -----------------------------------------------
+               MENSAJES
+            ----------------------------------------------- */
 
             document.getElementById("mensajePrincipal").textContent =
-                CONFIGURACION.bienvenida.titulo;
+                CONFIGURACION.pagina.mensajePrincipal;
 
 
             document.getElementById("mensajeSecundario").textContent =
-                CONFIGURACION.bienvenida.subtitulo;
+                CONFIGURACION.pagina.mensajeSecundario;
 
 
-            /* PROMOCIÓN */
 
-            document.getElementById("tituloPromocion").textContent =
-                CONFIGURACION.promocion.titulo;
+            /* -----------------------------------------------
+               FONDO PRINCIPAL
+            ----------------------------------------------- */
 
+            if (CONFIGURACION.pagina.fondoBienvenida) {
 
-            document.getElementById("detallePromocion").textContent =
-                CONFIGURACION.promocion.detalle;
-
-
-            /* LOGO */
-
-            document.getElementById("logoMarca").src =
-                CONFIGURACION.marca.logo;
+                const fondo =
+                    CONFIGURACION.pagina.fondoBienvenida;
 
 
-            /* FONDO */
+                document.getElementById(
+                    "pantallaBienvenida"
+                ).style.backgroundImage =
 
-            document.getElementById("pantallaBienvenida").style.backgroundImage =
-                `linear-gradient(
-                    rgba(0, 0, 0, 0.48),
-                    rgba(0, 0, 0, 0.72)
-                ),
-                url("${CONFIGURACION.marca.fondoBienvenida}")`;
+                    `linear-gradient(
+                        rgba(0,0,0,0.48),
+                        rgba(0,0,0,0.72)
+                    ),
+                    url("${fondo}")`;
 
 
-            document.getElementById("pantallaPrincipal").style.backgroundImage =
-                `linear-gradient(
-                    rgba(0, 0, 0, 0.58),
-                    rgba(0, 0, 0, 0.82)
-                ),
-                url("${CONFIGURACION.marca.fondoBienvenida}")`;
+                document.getElementById(
+                    "pantallaPrincipal"
+                ).style.backgroundImage =
+
+                    `linear-gradient(
+                        rgba(0,0,0,0.58),
+                        rgba(0,0,0,0.82)
+                    ),
+                    url("${fondo}")`;
+
+            }
+
+
+
+            /* -----------------------------------------------
+               PROMOCIÓN
+               
+               SI ESTÁ DESACTIVADA O VACÍA,
+               NO APARECE.
+            ----------------------------------------------- */
+
+            const promocion =
+                CONFIGURACION.promocion;
+
+
+            if (
+                promocion.activa &&
+                (
+                    promocion.titulo ||
+                    promocion.detalle
+                )
+            ) {
+
+                const elemento =
+                    document.getElementById("promocion");
+
+
+                elemento.style.display =
+                    "block";
+
+
+                document.getElementById(
+                    "tituloPromocion"
+                ).textContent =
+                    promocion.titulo;
+
+
+                document.getElementById(
+                    "detallePromocion"
+                ).textContent =
+                    promocion.detalle;
+
+
+
+                if (promocion.fondo) {
+
+                    elemento.style.backgroundImage =
+                        `url("${promocion.fondo}")`;
+
+                }
+
+            }
 
         }
 
@@ -846,17 +1110,22 @@
 
         function mostrarPaginaPrincipal() {
 
-            document.getElementById("pantallaBienvenida").style.display =
-                "none";
+            document.getElementById(
+                "pantallaBienvenida"
+            ).style.display = "none";
 
 
-            document.getElementById("pantallaPrincipal").style.display =
-                "block";
+            document.getElementById(
+                "pantallaPrincipal"
+            ).style.display = "block";
 
 
             window.scrollTo({
+
                 top: 0,
+
                 behavior: "smooth"
+
             });
 
         }
@@ -866,13 +1135,15 @@
         /* =====================================================
            CATÁLOGO
            
-           TODAVÍA NO LO CONSTRUIMOS.
+           TEMPORALMENTE MOSTRAMOS UN AVISO.
+           
+           DESPUÉS ESTA FUNCIÓN ABRIRÁ EL CATÁLOGO REAL.
         ===================================================== */
 
         function abrirCatalogo() {
 
             alert(
-                "Aquí construiremos el catálogo de vehículos."
+                "El catálogo de vehículos se construirá en el siguiente paso."
             );
 
         }
@@ -882,13 +1153,15 @@
         /* =====================================================
            COTIZADOR
            
-           TODAVÍA NO LO CONSTRUIMOS.
+           TEMPORALMENTE MOSTRAMOS UN AVISO.
+           
+           DESPUÉS ESTA FUNCIÓN ABRIRÁ EL COTIZADOR REAL.
         ===================================================== */
 
         function abrirCotizador() {
 
             alert(
-                "Aquí construiremos el cotizador."
+                "El cotizador se construirá en el siguiente paso."
             );
 
         }
@@ -901,20 +1174,42 @@
 
         function contactarWhatsApp() {
 
+
+            if (!CONFIGURACION.vendedor.whatsapp) {
+
+                alert(
+                    "El WhatsApp del vendedor todavía no está configurado."
+                );
+
+                return;
+
+            }
+
+
             const mensaje =
+
                 "Hola " +
+
                 CONFIGURACION.vendedor.nombre +
+
                 ", vi tu página y me gustaría recibir información.";
 
 
             const url =
+
                 "https://wa.me/" +
+
                 CONFIGURACION.vendedor.whatsapp +
+
                 "?text=" +
+
                 encodeURIComponent(mensaje);
 
 
-            window.open(url, "_blank");
+            window.open(
+                url,
+                "_blank"
+            );
 
         }
 
@@ -926,8 +1221,22 @@
 
         function llamarVendedor() {
 
+
+            if (!CONFIGURACION.vendedor.telefono) {
+
+                alert(
+                    "El teléfono del vendedor todavía no está configurado."
+                );
+
+                return;
+
+            }
+
+
             window.location.href =
+
                 "tel:" +
+
                 CONFIGURACION.vendedor.telefono;
 
         }
@@ -941,7 +1250,19 @@
         cargarConfiguracion();
 
 
+        /* =====================================================
+           MOSTRAR ID EN CONSOLA DURANTE DESARROLLO
+        ===================================================== */
+
+        console.log(
+            "Vendedor actual:",
+            vendedorId
+        );
+
+
     </script>
 
+
 </body>
+
 </html>
