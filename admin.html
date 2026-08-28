@@ -1990,9 +1990,9 @@
       try {
 
         const vendedorRef =
-          db
-            .collection("vendedores")
-            .doc(vendedorActual.id);
+  db
+    .collection("vendedores")
+    .doc(vendedorActual);
 
         const datosVendedor =
           await vendedorRef.get();
@@ -2110,9 +2110,9 @@
       try {
 
         const vendedorRef =
-          db
-            .collection("vendedores")
-            .doc(vendedorActual.id);
+  db
+    .collection("vendedores")
+    .doc(vendedorActual);
 
         const snap =
           await vendedorRef.get();
