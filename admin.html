@@ -867,7 +867,108 @@
           </button>
 
         </div>
+        <!-- =========================
+             VEHÍCULOS DEL VENDEDOR
+        ========================= -->
 
+        <div class="seccion">
+
+          <h3>🚗 Vehículos</h3>
+
+          <p class="ayuda">
+            Agrega los vehículos que este vendedor tendrá disponibles
+            para mostrar a sus clientes.
+          </p>
+
+          <div class="grupo">
+            <label>Nombre del vehículo</label>
+
+            <input
+              type="text"
+              id="nuevoVehiculoNombre"
+              placeholder="Ej. Mitsubishi Outlander"
+            >
+          </div>
+
+          <div class="fila">
+
+            <div class="grupo">
+              <label>Modelo / Año</label>
+
+              <input
+                type="text"
+                id="nuevoVehiculoAnio"
+                placeholder="Ej. 2026"
+              >
+            </div>
+
+            <div class="grupo">
+              <label>Precio</label>
+
+              <input
+                type="text"
+                id="nuevoVehiculoPrecio"
+                placeholder="Ej. $589,900"
+              >
+            </div>
+
+          </div>
+
+          <div class="grupo">
+            <label>Descripción</label>
+
+            <textarea
+              id="nuevoVehiculoDescripcion"
+              placeholder="Describe brevemente el vehículo..."
+            ></textarea>
+          </div>
+
+          <div class="grupo">
+            <label>Foto del vehículo</label>
+
+            <input
+              type="url"
+              id="nuevoVehiculoFoto"
+              placeholder="Pega aquí la dirección de la imagen"
+            >
+
+            <div class="ayuda">
+              Por ahora utilizaremos una dirección de imagen.
+            </div>
+
+            <img
+              id="previewNuevoVehiculo"
+              class="vista-previa"
+              alt="Vista previa del vehículo"
+            >
+          </div>
+
+          <button
+            type="button"
+            class="btn-negro"
+            onclick="agregarVehiculo()"
+          >
+            🚗 Agregar vehículo
+          </button>
+
+          <div id="mensajeVehiculo"></div>
+
+        </div>
+
+
+        <!-- =========================
+             LISTA DE VEHÍCULOS
+        ========================= -->
+
+        <div class="seccion">
+
+          <h3>📋 Vehículos registrados</h3>
+
+          <div id="listaVehiculos">
+            Todavía no hay vehículos registrados.
+          </div>
+
+        </div>
       </div>
 
 
