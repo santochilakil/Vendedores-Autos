@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -10,35 +10,30 @@ DOCTYPE html>
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Página del vendedor</title>
+    <title>Vendedores Autos</title>
 
 
     <style>
 
-        /* =====================================================
-           CONFIGURACIÓN GENERAL
-        ===================================================== */
-
         * {
             box-sizing: border-box;
+        }
+
+
+        html,
+        body {
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
+            width: 100%;
+            min-height: 100%;
             font-family: Arial, Helvetica, sans-serif;
             background: #111;
             color: white;
-            min-height: 100vh;
         }
 
-        button {
-            font-family: inherit;
-            cursor: pointer;
+
+        body {
+            overflow-x: hidden;
         }
 
 
@@ -54,7 +49,10 @@ DOCTYPE html>
             left: 0;
 
             width: 100%;
-            height: 68px;
+
+            min-height: 72px;
+
+            padding: 10px 15px;
 
             display: flex;
 
@@ -62,13 +60,14 @@ DOCTYPE html>
 
             justify-content: space-between;
 
-            padding: 8px 15px;
+            gap: 12px;
 
-            background: rgba(0, 0, 0, 0.78);
+            background: rgba(0,0,0,0.82);
 
             backdrop-filter: blur(8px);
 
-            z-index: 1000;
+            z-index: 100;
+
         }
 
 
@@ -81,13 +80,15 @@ DOCTYPE html>
             gap: 10px;
 
             min-width: 0;
+
         }
 
 
         .foto-mini {
 
-            width: 45px;
-            height: 45px;
+            width: 48px;
+
+            height: 48px;
 
             border-radius: 50%;
 
@@ -95,37 +96,34 @@ DOCTYPE html>
 
             border: 2px solid white;
 
-            flex-shrink: 0;
+            background: #333;
+
         }
 
 
         .nombre-mini {
 
-            font-size: 14px;
+            font-size: 16px;
 
-            font-weight: bold;
+            font-weight: 900;
 
             white-space: nowrap;
 
             overflow: hidden;
 
             text-overflow: ellipsis;
+
         }
 
 
         .agencia-mini {
 
-            font-size: 11px;
+            font-size: 12px;
 
-            opacity: 0.8;
+            color: #ccc;
 
             margin-top: 3px;
 
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
         }
 
 
@@ -133,30 +131,29 @@ DOCTYPE html>
 
             display: flex;
 
-            gap: 7px;
+            gap: 8px;
 
-            flex-shrink: 0;
         }
 
 
         .boton-contacto {
 
-            width: 38px;
-            height: 38px;
+            width: 44px;
 
-            border: none;
+            height: 44px;
 
             border-radius: 50%;
 
+            border: none;
+
             background: white;
 
-            font-size: 17px;
+            color: #111;
 
-            display: flex;
+            font-size: 20px;
 
-            align-items: center;
+            cursor: pointer;
 
-            justify-content: center;
         }
 
 
@@ -168,7 +165,9 @@ DOCTYPE html>
 
             min-height: 100vh;
 
-            padding: 100px 20px 50px;
+            width: 100%;
+
+            padding: 110px 20px 35px;
 
             display: flex;
 
@@ -180,37 +179,41 @@ DOCTYPE html>
 
             text-align: center;
 
+            background:
+
+                linear-gradient(
+                    rgba(0,0,0,0.48),
+                    rgba(0,0,0,0.72)
+                ),
+
+                #222;
+
             background-size: cover;
 
             background-position: center;
 
-            background-repeat: no-repeat;
         }
 
-
-        /* =====================================================
-           LOGO
-        ===================================================== */
 
         .logo-marca {
 
             width: 150px;
 
-            max-width: 60%;
+            max-width: 60vw;
 
-            margin-bottom: 22px;
+            max-height: 110px;
 
             object-fit: contain;
+
+            margin-bottom: 18px;
+
         }
 
-
-        /* =====================================================
-           FOTO VENDEDOR
-        ===================================================== */
 
         .foto-vendedor {
 
             width: 120px;
+
             height: 120px;
 
             object-fit: cover;
@@ -219,67 +222,65 @@ DOCTYPE html>
 
             border: 4px solid white;
 
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+
+            background: #333;
+
         }
 
 
-        /* =====================================================
-           INFORMACIÓN
-        ===================================================== */
-
         .bienvenida h1 {
 
-            font-size: 32px;
+            margin: 5px 0;
 
-            font-weight: 800;
+            font-size: 34px;
 
-            margin-bottom: 7px;
+            font-weight: 900;
+
+            text-shadow:
+                0 3px 12px rgba(0,0,0,0.8);
+
         }
 
 
         .puesto {
 
-            font-size: 17px;
+            font-size: 16px;
 
-            opacity: 0.9;
+            color: #ddd;
 
-            margin-bottom: 22px;
+            margin-bottom: 18px;
+
         }
 
 
-        /* =====================================================
-           MENSAJES
-        ===================================================== */
-
         .mensaje-principal {
 
-            width: 100%;
-
-            max-width: 520px;
+            max-width: 700px;
 
             font-size: 25px;
 
             line-height: 1.25;
 
-            font-weight: 800;
+            font-weight: 900;
 
-            margin-bottom: 14px;
+            margin: 10px auto;
+
         }
 
 
         .mensaje-secundario {
 
-            width: 100%;
+            max-width: 650px;
 
-            max-width: 470px;
-
-            font-size: 15px;
+            font-size: 16px;
 
             line-height: 1.5;
 
-            opacity: 0.9;
+            color: #eee;
 
-            margin-bottom: 25px;
+            margin: 5px auto 20px;
+
         }
 
 
@@ -291,82 +292,87 @@ DOCTYPE html>
 
             width: 100%;
 
-            max-width: 540px;
+            max-width: 720px;
 
-            padding: 25px 20px;
+            min-height: 150px;
 
-            margin-bottom: 28px;
+            margin: 15px auto 20px;
 
-            border-radius: 18px;
+            padding: 25px;
+
+            border-radius: 22px;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            background-color: #222;
 
             background-size: cover;
 
             background-position: center;
 
-            background-repeat: no-repeat;
-
-            position: relative;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.35);
 
             overflow: hidden;
 
-            border: 1px solid rgba(255,255,255,0.35);
-
-            box-shadow:
-                0 10px 35px rgba(0,0,0,0.40);
-        }
-
-
-        .promocion::before {
-
-            content: "";
-
-            position: absolute;
-
-            inset: 0;
-
-            background: rgba(0,0,0,0.48);
-
-            z-index: 0;
         }
 
 
         .promocion-contenido {
 
-            position: relative;
+            width: 100%;
 
-            z-index: 1;
+            padding: 20px;
+
+            border-radius: 16px;
+
+            background: rgba(0,0,0,0.55);
+
         }
 
 
         .promocion-etiqueta {
 
-            font-size: 11px;
+            font-size: 12px;
 
             text-transform: uppercase;
 
-            letter-spacing: 1.5px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
 
             margin-bottom: 8px;
 
-            opacity: 0.9;
+            color: #ddd;
+
         }
 
 
         .promocion-titulo {
 
-            font-size: 23px;
+            font-size: 27px;
 
-            font-weight: 800;
+            font-weight: 900;
 
-            margin-bottom: 8px;
+            line-height: 1.2;
+
         }
 
 
         .promocion-detalle {
 
+            margin-top: 10px;
+
             font-size: 16px;
 
-            font-weight: bold;
+            line-height: 1.45;
+
         }
 
 
@@ -378,7 +384,7 @@ DOCTYPE html>
 
             border: none;
 
-            padding: 15px 48px;
+            padding: 16px 32px;
 
             border-radius: 30px;
 
@@ -386,20 +392,14 @@ DOCTYPE html>
 
             color: #111;
 
-            font-size: 17px;
+            font-size: 18px;
 
-            font-weight: 800;
+            font-weight: 900;
 
-            box-shadow:
-                0 8px 25px rgba(0,0,0,0.35);
+            cursor: pointer;
 
-            transition: transform 0.2s;
-        }
+            margin-top: 5px;
 
-
-        .boton-siguiente:hover {
-
-            transform: scale(1.04);
         }
 
 
@@ -409,17 +409,27 @@ DOCTYPE html>
 
         .pagina-principal {
 
-            display: none;
-
             min-height: 100vh;
 
-            padding: 105px 20px 45px;
+            width: 100%;
+
+            display: none;
+
+            padding: 115px 20px 40px;
+
+            background:
+
+                linear-gradient(
+                    rgba(0,0,0,0.58),
+                    rgba(0,0,0,0.82)
+                ),
+
+                #222;
 
             background-size: cover;
 
             background-position: center;
 
-            background-repeat: no-repeat;
         }
 
 
@@ -427,29 +437,30 @@ DOCTYPE html>
 
             width: 100%;
 
-            max-width: 600px;
+            max-width: 850px;
 
-            margin: 0 auto;
+            margin: auto;
 
             text-align: center;
+
         }
 
 
         .contenido-principal h2 {
 
-            font-size: 30px;
+            font-size: 32px;
 
-            margin-bottom: 10px;
+            margin: 10px 0;
+
         }
 
 
         .contenido-principal > p {
 
-            font-size: 16px;
+            color: #ddd;
 
-            opacity: 0.85;
+            font-size: 17px;
 
-            margin-bottom: 35px;
         }
 
 
@@ -463,7 +474,10 @@ DOCTYPE html>
 
             grid-template-columns: 1fr;
 
-            gap: 18px;
+            gap: 15px;
+
+            margin-top: 30px;
+
         }
 
 
@@ -471,22 +485,24 @@ DOCTYPE html>
 
             width: 100%;
 
-            padding: 27px 20px;
+            min-height: 120px;
 
             border: none;
 
-            border-radius: 18px;
+            border-radius: 22px;
 
-            background: rgba(255,255,255,0.96);
+            background: rgba(255,255,255,0.94);
 
             color: #111;
 
-            font-size: 23px;
+            font-size: 25px;
 
-            font-weight: 800;
+            font-weight: 900;
 
-            box-shadow:
-                0 8px 28px rgba(0,0,0,0.35);
+            cursor: pointer;
+
+            padding: 25px;
+
         }
 
 
@@ -494,37 +510,42 @@ DOCTYPE html>
 
             display: block;
 
-            margin-top: 7px;
-
-            font-size: 13px;
+            font-size: 14px;
 
             font-weight: normal;
 
-            opacity: 0.65;
+            margin-top: 8px;
+
+            color: #555;
+
         }
 
 
         /* =====================================================
-           CONTACTO INFERIOR
+           CONTACTO
         ===================================================== */
 
         .contacto-inferior {
 
             margin-top: 40px;
 
-            padding: 18px;
+            padding: 20px;
 
-            border-radius: 16px;
+            border-radius: 18px;
 
             background: rgba(0,0,0,0.65);
+
         }
 
 
         .contacto-inferior p {
 
-            font-size: 14px;
+            font-size: 15px;
 
-            margin-bottom: 13px;
+            margin-top: 0;
+
+            margin-bottom: 15px;
+
         }
 
 
@@ -537,6 +558,7 @@ DOCTYPE html>
             gap: 10px;
 
             flex-wrap: wrap;
+
         }
 
 
@@ -544,7 +566,7 @@ DOCTYPE html>
 
             border: none;
 
-            padding: 11px 18px;
+            padding: 13px 20px;
 
             border-radius: 25px;
 
@@ -552,37 +574,42 @@ DOCTYPE html>
 
             color: #111;
 
-            font-weight: bold;
+            font-weight: 900;
+
+            cursor: pointer;
+
         }
 
 
         /* =====================================================
-           CELULARES
+           CELULAR
         ===================================================== */
 
         @media (max-width: 500px) {
 
             .bienvenida h1 {
-
                 font-size: 28px;
             }
 
 
             .mensaje-principal {
-
                 font-size: 21px;
             }
 
 
             .promocion-titulo {
-
-                font-size: 20px;
+                font-size: 21px;
             }
 
 
             .boton-menu {
-
                 font-size: 21px;
+            }
+
+
+            .foto-vendedor {
+                width: 105px;
+                height: 105px;
             }
 
         }
@@ -632,7 +659,6 @@ DOCTYPE html>
             <button
                 class="boton-contacto"
                 onclick="contactarWhatsApp()"
-                aria-label="WhatsApp"
             >
                 💬
             </button>
@@ -641,7 +667,6 @@ DOCTYPE html>
             <button
                 class="boton-contacto"
                 onclick="llamarVendedor()"
-                aria-label="Llamar"
             >
                 📞
             </button>
@@ -698,17 +723,11 @@ DOCTYPE html>
         ></div>
 
 
-        <!-- =================================================
-             PROMOCIÓN
-             
-             SI NO EXISTE INFORMACIÓN,
-             ESTE BLOQUE SE OCULTA AUTOMÁTICAMENTE.
-        ================================================== -->
+        <!-- PROMOCIÓN -->
 
         <div
             id="promocion"
             class="promocion"
-            style="display: none;"
         >
 
             <div class="promocion-contenido">
@@ -832,159 +851,268 @@ DOCTYPE html>
 
 
 
+    <!-- =====================================================
+         FIREBASE
+    ===================================================== -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+
     <script>
 
-
         /* =====================================================
-           IDENTIFICADOR DEL VENDEDOR
-           
-           ESTE DATO SERÁ MUY IMPORTANTE.
-
-           MÁS ADELANTE VENDRÁ DEL ENLACE/QR Y FIREBASE.
-           
-           EJEMPLO:
-           
-           /juan-perez
-           
-           EL SISTEMA SABRÁ QUE DEBE CARGAR
-           LOS DATOS DE JUAN.
+           CONFIGURACIÓN FIREBASE
         ===================================================== */
 
+        const firebaseConfig = {
 
-        const vendedorId = obtenerVendedorId();
+            apiKey:
+                "AIzaSyBeJo2BM4l2MobQtw1R4vFRe0XU2qeRuMk",
 
+            authDomain:
+                "vendedores-autos.firebaseapp.com",
 
+            projectId:
+                "vendedores-autos",
 
-        /* =====================================================
-           CONFIGURACIÓN TEMPORAL
-           
-           ESTO SOLO EXISTE MIENTRAS CONSTRUIMOS LA BASE.
+            storageBucket:
+                "vendedores-autos.firebasestorage.app",
 
-           MÁS ADELANTE ESTA INFORMACIÓN VENDRÁ
-           AUTOMÁTICAMENTE DESDE FIREBASE.
-        ===================================================== */
+            messagingSenderId:
+                "1041752209924",
 
+            appId:
+                "1:1041752209924:web:1ffef37192c41496391351",
 
-        const CONFIGURACION = {
-
-            vendedor: {
-
-                nombre: "",
-
-                puesto: "",
-
-                telefono: "",
-
-                whatsapp: "",
-
-                foto: ""
-
-            },
-
-
-            agencia: {
-
-                nombre: "",
-
-                logo: ""
-
-            },
-
-
-            pagina: {
-
-                fondoBienvenida: "",
-
-                mensajePrincipal: "",
-
-                mensajeSecundario: ""
-
-            },
-
-
-            promocion: {
-
-                activa: false,
-
-                titulo: "",
-
-                detalle: "",
-
-                fondo: ""
-
-            }
+            measurementId:
+                "G-0JZSD268GJ"
 
         };
 
 
+        firebase.initializeApp(
+            firebaseConfig
+        );
+
+
+        const db =
+            firebase.firestore();
+
+
+        const vendedoresRef =
+            db.collection("vendedores");
+
+
 
         /* =====================================================
-           OBTENER ID DEL VENDEDOR
+           IDENTIFICADOR DEL VENDEDOR
+
+           EJEMPLO:
+
+           ?vendedor=cesar-ayala
+        ===================================================== */
+
+        const vendedorId =
+            obtenerVendedorId();
+
+
+
+        /* =====================================================
+           OBTENER ID
         ===================================================== */
 
         function obtenerVendedorId() {
 
             const parametros =
-                new URLSearchParams(window.location.search);
+                new URLSearchParams(
+                    window.location.search
+                );
 
 
-            const id =
-                parametros.get("vendedor");
-
-
-            if (id) {
-
-                return id;
-
-            }
-
-
-            return null;
+            return parametros.get(
+                "vendedor"
+            );
 
         }
 
 
 
         /* =====================================================
-           APLICAR CONFIGURACIÓN
+           CARGAR VENDEDOR
         ===================================================== */
 
-        function cargarConfiguracion() {
+        async function cargarVendedor() {
+
+            console.log(
+                "Vendedor solicitado:",
+                vendedorId
+            );
+
+
+            if (!vendedorId) {
+
+                mostrarError(
+                    "Falta el vendedor en el enlace."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const documento =
+                    await vendedoresRef
+                        .doc(vendedorId)
+                        .get();
+
+
+                console.log(
+                    "Documento existe:",
+                    documento.exists
+                );
+
+
+                if (!documento.exists) {
+
+                    mostrarError(
+                        "No encontramos este vendedor."
+                    );
+
+                    return;
+
+                }
+
+
+                const datos =
+                    documento.data();
+
+
+                console.log(
+                    "Datos del vendedor:",
+                    datos
+                );
+
+
+                aplicarDatos(
+                    datos
+                );
+
+
+            }
+
+            catch(error) {
+
+                console.error(
+                    "Error Firebase:",
+                    error
+                );
+
+
+                mostrarError(
+                    "No se pudo cargar la información."
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           APLICAR DATOS
+        ===================================================== */
+
+        function aplicarDatos(
+            datos
+        ) {
+
+            /* -----------------------------------------------
+               NOMBRE
+            ----------------------------------------------- */
+
+            document.getElementById(
+                "nombreVendedor"
+            ).textContent =
+                datos.nombre || "";
+
+
+            document.getElementById(
+                "nombreMini"
+            ).textContent =
+                datos.nombre || "";
 
 
             /* -----------------------------------------------
-               VENDEDOR
+               AGENCIA
             ----------------------------------------------- */
 
-            document.getElementById("nombreVendedor").textContent =
-                CONFIGURACION.vendedor.nombre;
+            document.getElementById(
+                "agenciaMini"
+            ).textContent =
+                datos.agencia || "";
 
 
-            document.getElementById("nombreMini").textContent =
-                CONFIGURACION.vendedor.nombre;
+            /* -----------------------------------------------
+               PUESTO
+            ----------------------------------------------- */
 
-
-            document.getElementById("puestoVendedor").textContent =
-                CONFIGURACION.vendedor.puesto;
-
-
-            document.getElementById("agenciaMini").textContent =
-                CONFIGURACION.agencia.nombre;
-
+            document.getElementById(
+                "puestoVendedor"
+            ).textContent =
+                datos.puesto ||
+                "Asesor de ventas";
 
 
             /* -----------------------------------------------
                FOTO
             ----------------------------------------------- */
 
-            if (CONFIGURACION.vendedor.foto) {
+            const foto =
+                datos.fotoVendedor ||
+                datos.foto ||
+                "";
 
-                document.getElementById("fotoVendedor").src =
-                    CONFIGURACION.vendedor.foto;
+
+            const fotoPrincipal =
+                document.getElementById(
+                    "fotoVendedor"
+                );
 
 
-                document.getElementById("fotoMini").src =
-                    CONFIGURACION.vendedor.foto;
+            const fotoMini =
+                document.getElementById(
+                    "fotoMini"
+                );
+
+
+            if (foto) {
+
+                fotoPrincipal.src =
+                    foto;
+
+                fotoMini.src =
+                    foto;
+
+
+                fotoPrincipal.style.display =
+                    "block";
+
+                fotoMini.style.display =
+                    "block";
+
+            }
+
+            else {
+
+                fotoPrincipal.style.display =
+                    "none";
+
+                fotoMini.style.display =
+                    "none";
 
             }
 
@@ -994,36 +1122,70 @@ DOCTYPE html>
                LOGO
             ----------------------------------------------- */
 
-            if (CONFIGURACION.agencia.logo) {
+            const logo =
+                datos.logoAgencia ||
+                datos.logo ||
+                "";
 
-                document.getElementById("logoMarca").src =
-                    CONFIGURACION.agencia.logo;
+
+            const logoElemento =
+                document.getElementById(
+                    "logoMarca"
+                );
+
+
+            if (logo) {
+
+                logoElemento.src =
+                    logo;
+
+                logoElemento.style.display =
+                    "block";
+
+            }
+
+            else {
+
+                logoElemento.style.display =
+                    "none";
 
             }
 
 
 
             /* -----------------------------------------------
-               MENSAJES
+               TÍTULO BIENVENIDA
             ----------------------------------------------- */
 
-            document.getElementById("mensajePrincipal").textContent =
-                CONFIGURACION.pagina.mensajePrincipal;
+            document.getElementById(
+                "mensajePrincipal"
+            ).textContent =
+                datos.tituloBienvenida ||
+                "";
 
 
-            document.getElementById("mensajeSecundario").textContent =
-                CONFIGURACION.pagina.mensajeSecundario;
+            /* -----------------------------------------------
+               TEXTO BIENVENIDA
+            ----------------------------------------------- */
+
+            document.getElementById(
+                "mensajeSecundario"
+            ).textContent =
+                datos.textoBienvenida ||
+                "";
 
 
 
             /* -----------------------------------------------
-               FONDO PRINCIPAL
+               FONDO BIENVENIDA
             ----------------------------------------------- */
 
-            if (CONFIGURACION.pagina.fondoBienvenida) {
+            if (
+                datos.fondoBienvenida
+            ) {
 
                 const fondo =
-                    CONFIGURACION.pagina.fondoBienvenida;
+                    datos.fondoBienvenida;
 
 
                 document.getElementById(
@@ -1053,50 +1215,115 @@ DOCTYPE html>
 
             /* -----------------------------------------------
                PROMOCIÓN
-               
-               SI ESTÁ DESACTIVADA O VACÍA,
-               NO APARECE.
             ----------------------------------------------- */
 
-            const promocion =
-                CONFIGURACION.promocion;
+            cargarPromocion(
+                datos
+            );
+
+        }
+
+
+
+        /* =====================================================
+           PROMOCIÓN
+        ===================================================== */
+
+        function cargarPromocion(
+            datos
+        ) {
+
+            const titulo =
+                datos.promoTitulo ||
+                "";
+
+
+            const texto =
+                datos.promoTexto ||
+                "";
+
+
+            const descuento =
+                datos.promoDescuento ||
+                "";
+
+
+            const fondo =
+                datos.promoFondo ||
+                "";
+
+
+            const elemento =
+                document.getElementById(
+                    "promocion"
+                );
+
+
+            /*
+
+               SI NO HAY TÍTULO:
+
+               NO SE MUESTRA LA PROMOCIÓN.
+
+            */
+
+            if (!titulo.trim()) {
+
+                elemento.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            elemento.style.display =
+                "flex";
+
+
+            document.getElementById(
+                "tituloPromocion"
+            ).textContent =
+                titulo;
+
+
+            const detalles = [];
 
 
             if (
-                promocion.activa &&
-                (
-                    promocion.titulo ||
-                    promocion.detalle
-                )
+                texto.trim()
             ) {
 
-                const elemento =
-                    document.getElementById("promocion");
+                detalles.push(
+                    texto
+                );
+
+            }
 
 
-                elemento.style.display =
-                    "block";
+            if (
+                descuento.trim()
+            ) {
+
+                detalles.push(
+                    descuento
+                );
+
+            }
 
 
-                document.getElementById(
-                    "tituloPromocion"
-                ).textContent =
-                    promocion.titulo;
+            document.getElementById(
+                "detallePromocion"
+            ).textContent =
+                detalles.join(
+                    " • "
+                );
 
 
-                document.getElementById(
-                    "detallePromocion"
-                ).textContent =
-                    promocion.detalle;
+            if (fondo.trim()) {
 
-
-
-                if (promocion.fondo) {
-
-                    elemento.style.backgroundImage =
-                        `url("${promocion.fondo}")`;
-
-                }
+                elemento.style.backgroundImage =
+                    `url("${fondo}")`;
 
             }
 
@@ -1105,19 +1332,21 @@ DOCTYPE html>
 
 
         /* =====================================================
-           MOSTRAR PÁGINA PRINCIPAL
+           PÁGINA PRINCIPAL
         ===================================================== */
 
         function mostrarPaginaPrincipal() {
 
             document.getElementById(
                 "pantallaBienvenida"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
 
             document.getElementById(
                 "pantallaPrincipal"
-            ).style.display = "block";
+            ).style.display =
+                "block";
 
 
             window.scrollTo({
@@ -1134,10 +1363,6 @@ DOCTYPE html>
 
         /* =====================================================
            CATÁLOGO
-           
-           TEMPORALMENTE MOSTRAMOS UN AVISO.
-           
-           DESPUÉS ESTA FUNCIÓN ABRIRÁ EL CATÁLOGO REAL.
         ===================================================== */
 
         function abrirCatalogo() {
@@ -1152,10 +1377,6 @@ DOCTYPE html>
 
         /* =====================================================
            COTIZADOR
-           
-           TEMPORALMENTE MOSTRAMOS UN AVISO.
-           
-           DESPUÉS ESTA FUNCIÓN ABRIRÁ EL COTIZADOR REAL.
         ===================================================== */
 
         function abrirCotizador() {
@@ -1174,8 +1395,11 @@ DOCTYPE html>
 
         function contactarWhatsApp() {
 
+            const whatsapp =
+                CONFIGURACION_ACTUAL.whatsapp;
 
-            if (!CONFIGURACION.vendedor.whatsapp) {
+
+            if (!whatsapp) {
 
                 alert(
                     "El WhatsApp del vendedor todavía no está configurado."
@@ -1186,24 +1410,24 @@ DOCTYPE html>
             }
 
 
+            const nombre =
+                CONFIGURACION_ACTUAL.nombre ||
+                "asesor";
+
+
             const mensaje =
-
                 "Hola " +
-
-                CONFIGURACION.vendedor.nombre +
-
+                nombre +
                 ", vi tu página y me gustaría recibir información.";
 
 
             const url =
-
                 "https://wa.me/" +
-
-                CONFIGURACION.vendedor.whatsapp +
-
+                whatsapp +
                 "?text=" +
-
-                encodeURIComponent(mensaje);
+                encodeURIComponent(
+                    mensaje
+                );
 
 
             window.open(
@@ -1221,8 +1445,11 @@ DOCTYPE html>
 
         function llamarVendedor() {
 
+            const telefono =
+                CONFIGURACION_ACTUAL.telefono;
 
-            if (!CONFIGURACION.vendedor.telefono) {
+
+            if (!telefono) {
 
                 alert(
                     "El teléfono del vendedor todavía no está configurado."
@@ -1234,12 +1461,58 @@ DOCTYPE html>
 
 
             window.location.href =
-
                 "tel:" +
-
-                CONFIGURACION.vendedor.telefono;
+                telefono;
 
         }
+
+
+
+        /* =====================================================
+           CONFIGURACIÓN SIMPLE PARA CONTACTO
+        ===================================================== */
+
+        let CONFIGURACION_ACTUAL = {
+
+            nombre: "",
+
+            telefono: "",
+
+            whatsapp: ""
+
+        };
+
+
+        /* =====================================================
+           GUARDAR DATOS DE CONTACTO AL CARGAR
+        ===================================================== */
+
+        const aplicarDatosOriginal =
+            aplicarDatos;
+
+
+        aplicarDatos =
+            function(datos) {
+
+                CONFIGURACION_ACTUAL = {
+
+                    nombre:
+                        datos.nombre || "",
+
+                    telefono:
+                        datos.telefono || "",
+
+                    whatsapp:
+                        datos.whatsapp || ""
+
+                };
+
+
+                aplicarDatosOriginal(
+                    datos
+                );
+
+            };
 
 
 
@@ -1247,21 +1520,15 @@ DOCTYPE html>
            INICIAR
         ===================================================== */
 
-        cargarConfiguracion();
+        cargarVendedor();
 
-
-        /* =====================================================
-           MOSTRAR ID EN CONSOLA DURANTE DESARROLLO
-        ===================================================== */
 
         console.log(
-            "Vendedor actual:",
+            "ID del vendedor:",
             vendedorId
         );
 
-
     </script>
-
 
 </body>
 
