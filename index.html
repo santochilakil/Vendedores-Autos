@@ -1365,13 +1365,313 @@
            CATÁLOGO
         ===================================================== */
 
-        function abrirCatalogo() {
+       /* =====================================================
+   CATÁLOGO
+===================================================== */
 
-            alert(
-                "El catálogo de vehículos se construirá en el siguiente paso."
+function abrirCatalogo() {
+
+    const catalogoExistente =
+        document.getElementById("catalogoVehiculos");
+
+    if (catalogoExistente) {
+        catalogoExistente.remove();
+        return;
+    }
+
+    const catalogo =
+        document.createElement("div");
+
+    catalogo.id = "catalogoVehiculos";
+
+    catalogo.style.position = "fixed";
+    catalogo.style.top = "0";
+    catalogo.style.left = "0";
+    catalogo.style.width = "100%";
+    catalogo.style.height = "100%";
+    catalogo.style.background = "#111";
+    catalogo.style.zIndex = "9999";
+    catalogo.style.overflowY = "auto";
+    catalogo.style.padding = "90px 20px 40px";
+
+    catalogo.innerHTML = `
+
+        <div style="
+            max-width:900px;
+            margin:auto;
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:30px;
+            ">
+
+                <h2 style="
+                    margin:0;
+                    font-size:32px;
+                    font-weight:900;
+                ">
+                    🚗 Catálogo
+                </h2>
+
+                <button
+                    onclick="cerrarCatalogo()"
+                    style="
+                        border:none;
+                        background:white;
+                        color:#111;
+                        border-radius:30px;
+                        padding:12px 22px;
+                        font-size:16px;
+                        font-weight:900;
+                    "
+                >
+                    Cerrar
+                </button>
+
+            </div>
+
+            <div id="listaVehiculos">
+
+                <div style="
+                    background:#222;
+                    border-radius:20px;
+                    padding:30px;
+                    text-align:center;
+                    color:#ddd;
+                ">
+                    Cargando vehículos...
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(catalogo);
+
+    cargarVehiculos();
+
+}
+
+
+/* =====================================================
+   CERRAR CATÁLOGO
+===================================================== */
+
+function cerrarCatalogo() {
+
+    const catalogo =
+        document.getElementById(
+            "catalogoVehiculos"
+        );
+
+    if (catalogo) {
+        catalogo.remove();
+    }
+
+}
+
+
+/* =====================================================
+   CARGAR VEHÍCULOS
+===================================================== */
+
+async function cargarVehiculos() {
+
+    const contenedor =
+        document.getElementById(
+            "listaVehiculos"
+        );
+
+    if (!contenedor) {
+        return;
+    }
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("vendedores")
+                .doc(vendedorId)
+                .collection("vehiculos")
+                .get();
+
+        if (snapshot.empty) {
+
+            contenedor.innerHTML = `
+
+                <div style="
+                    background:#222;
+                    border-radius:20px;
+                    padding:35px;
+                    text-align:center;
+                    color:#ddd;
+                ">
+
+                    <div style="
+                        font-size:45px;
+                        margin-bottom:15px;
+                    ">
+                        🚗
+                    </div>
+
+                    <h3 style="
+                        margin:0 0 10px;
+                        font-size:24px;
+                        color:white;
+                    ">
+                        Próximamente
+                    </h3>
+
+                    <p style="
+                        margin:0;
+                        font-size:16px;
+                    ">
+                        Los vehículos estarán disponibles
+                        próximamente.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+        contenedor.innerHTML = "";
+
+
+        snapshot.forEach((doc) => {
+
+            const vehiculo =
+                doc.data();
+
+
+            const tarjeta =
+                document.createElement("div");
+
+
+            tarjeta.style.background =
+                "#222";
+
+            tarjeta.style.borderRadius =
+                "22px";
+
+            tarjeta.style.padding =
+                "20px";
+
+            tarjeta.style.marginBottom =
+                "20px";
+
+
+            tarjeta.innerHTML = `
+
+                ${
+                    vehiculo.foto
+                    ?
+                    `
+                    <img
+                        src="${vehiculo.foto}"
+                        style="
+                            width:100%;
+                            max-height:280px;
+                            object-fit:contain;
+                            border-radius:16px;
+                            background:#111;
+                            margin-bottom:15px;
+                        "
+                    >
+                    `
+                    :
+                    ""
+                }
+
+
+                <h3 style="
+                    margin:5px 0;
+                    font-size:25px;
+                    color:white;
+                ">
+                    ${vehiculo.modelo || "Vehículo"}
+                </h3>
+
+
+                ${
+                    vehiculo.descripcion
+                    ?
+                    `
+                    <p style="
+                        color:#ccc;
+                        line-height:1.5;
+                    ">
+                        ${vehiculo.descripcion}
+                    </p>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    vehiculo.precio
+                    ?
+                    `
+                    <div style="
+                        font-size:22px;
+                        font-weight:900;
+                        margin-top:15px;
+                    ">
+                        $${vehiculo.precio}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            contenedor.appendChild(
+                tarjeta
             );
 
-        }
+        });
+
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Error cargando vehículos:",
+            error
+        );
+
+
+        contenedor.innerHTML = `
+
+            <div style="
+                background:#222;
+                border-radius:20px;
+                padding:30px;
+                text-align:center;
+                color:#ffb3b3;
+            ">
+
+                No se pudieron cargar
+                los vehículos.
+
+            </div>
+
+        `;
+
+    }
+
+} 
 
 
 
