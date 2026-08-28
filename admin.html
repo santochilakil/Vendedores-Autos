@@ -1934,7 +1934,268 @@
         .replace(/'/g, "&#039;");
 
     }
+    /* ==========================================
+       AGREGAR VEHÍCULO
+    ========================================== */
 
+    async function agregarVehiculo() {
+
+      if (!vendedorActual) {
+        alert("Primero selecciona un vendedor.");
+        return;
+      }
+
+      const nombre =
+        document
+          .getElementById("nuevoVehiculoNombre")
+          .value
+          .trim();
+
+      const anio =
+        document
+          .getElementById("nuevoVehiculoAnio")
+          .value
+          .trim();
+
+      const precio =
+        document
+          .getElementById("nuevoVehiculoPrecio")
+          .value
+          .trim();
+
+      const descripcion =
+        document
+          .getElementById("nuevoVehiculoDescripcion")
+          .value
+          .trim();
+
+      const foto =
+        document
+          .getElementById("nuevoVehiculoFoto")
+          .value
+          .trim();
+
+      const mensaje =
+        document.getElementById("mensajeVehiculo");
+
+      if (!nombre) {
+        mensaje.innerHTML = `
+          <div class="mensaje error">
+            Escribe el nombre del vehículo.
+          </div>
+        `;
+        return;
+      }
+
+      try {
+
+        const vendedorRef =
+          db
+            .collection("vendedores")
+            .doc(vendedorActual.id);
+
+        const datosVendedor =
+          await vendedorRef.get();
+
+        if (!datosVendedor.exists) {
+          throw new Error("No se encontró el vendedor.");
+        }
+
+        const vendedor =
+          datosVendedor.data();
+
+        const vehiculos =
+          Array.isArray(vendedor.vehiculos)
+            ? vendedor.vehiculos
+            : [];
+
+        const nuevoVehiculo = {
+
+          id:
+            Date.now().toString(),
+
+          nombre:
+            nombre,
+
+          anio:
+            anio,
+
+          precio:
+            precio,
+
+          descripcion:
+            descripcion,
+
+          foto:
+            foto,
+
+          activo:
+            true,
+
+          fechaCreacion:
+            firebase.firestore.Timestamp.now()
+
+        };
+
+        vehiculos.push(nuevoVehiculo);
+
+        await vendedorRef.update({
+
+          vehiculos:
+            vehiculos,
+
+          fechaActualizacion:
+            firebase.firestore.Timestamp.now()
+
+        });
+
+        document
+          .getElementById("nuevoVehiculoNombre")
+          .value = "";
+
+        document
+          .getElementById("nuevoVehiculoAnio")
+          .value = "";
+
+        document
+          .getElementById("nuevoVehiculoPrecio")
+          .value = "";
+
+        document
+          .getElementById("nuevoVehiculoDescripcion")
+          .value = "";
+
+        document
+          .getElementById("nuevoVehiculoFoto")
+          .value = "";
+
+        mensaje.innerHTML = `
+          <div class="mensaje exito">
+            ✅ Vehículo agregado correctamente.
+          </div>
+        `;
+
+        cargarVehiculos();
+
+      } catch (error) {
+
+        console.error(error);
+
+        mensaje.innerHTML = `
+          <div class="mensaje error">
+            No se pudo guardar el vehículo.
+            <br><br>
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+      }
+    }
+
+
+    /* ==========================================
+       CARGAR VEHÍCULOS
+    ========================================== */
+
+    async function cargarVehiculos() {
+
+      const contenedor =
+        document.getElementById("listaVehiculos");
+
+      if (!vendedorActual) {
+        contenedor.innerHTML =
+          "Selecciona un vendedor.";
+        return;
+      }
+
+      try {
+
+        const vendedorRef =
+          db
+            .collection("vendedores")
+            .doc(vendedorActual.id);
+
+        const snap =
+          await vendedorRef.get();
+
+        if (!snap.exists) {
+          contenedor.innerHTML =
+            "No se encontró el vendedor.";
+          return;
+        }
+
+        const datos =
+          snap.data();
+
+        const vehiculos =
+          Array.isArray(datos.vehiculos)
+            ? datos.vehiculos
+            : [];
+
+        if (vehiculos.length === 0) {
+
+          contenedor.innerHTML = `
+            <div class="mensaje">
+              Todavía no hay vehículos registrados.
+            </div>
+          `;
+
+          return;
+        }
+
+        contenedor.innerHTML =
+          vehiculos
+            .map((vehiculo) => {
+
+              return `
+                <div class="tarjeta-vehiculo">
+
+                  ${
+                    vehiculo.foto
+                      ? `
+                        <img
+                          src="${escapeHtml(vehiculo.foto)}"
+                          alt="${escapeHtml(vehiculo.nombre)}"
+                          class="foto-vehiculo"
+                        >
+                      `
+                      : ""
+                  }
+
+                  <h4>
+                    🚗 ${escapeHtml(vehiculo.nombre)}
+                  </h4>
+
+                  <p>
+                    ${escapeHtml(vehiculo.anio || "")}
+                  </p>
+
+                  <p>
+                    <strong>
+                      ${escapeHtml(vehiculo.precio || "")}
+                    </strong>
+                  </p>
+
+                  <p>
+                    ${escapeHtml(vehiculo.descripcion || "")}
+                  </p>
+
+                </div>
+              `;
+
+            })
+            .join("");
+
+      } catch (error) {
+
+        console.error(error);
+
+        contenedor.innerHTML = `
+          <div class="mensaje error">
+            No se pudieron cargar los vehículos.
+          </div>
+        `;
+      }
+    }
   </script>
 
 </body>
