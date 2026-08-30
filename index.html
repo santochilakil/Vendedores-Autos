@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Carlos Ramírez | Mitsubishi Motors</title>
+
+<style>
+
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    background:#030508;
+    color:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    overflow-x:auto;
+}
+
+button{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* =====================================================
+   ESTRUCTURA PRINCIPAL
+===================================================== */
+
+.pagina{
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(0,120,255,.10),
+            transparent 35%
+        ),
+        #030508;
+}
+
+
+/* =====================================================
+   MENÚ IZQUIERDO
+===================================================== */
+
+.sidebar{
+    width:305px;
+    min-width:305px;
+    min-height:100vh;
+
+    padding:30px 18px 20px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #06080d 0%,
+            #020408 100%
+        );
+
+    border-right:
+        1px solid rgba(255,255,255,.16);
+
+    position:sticky;
+    top:0;
+
+    z-index:20;
+}
+
+
+/* FOTO */
+
+.foto-vendedor{
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+        2px solid #009cff;
+
+    box-shadow:
+        0 0 0 4px rgba(0,156,255,.06),
+        0 0 28px rgba(0,156,255,.45);
+
+    margin-bottom:14px;
+}
+
+
+/* NOMBRE */
+
+.nombre-vendedor{
+    text-align:center;
+
+    font-size:29px;
+    font-weight:900;
+
+    line-height:1.05;
+
+    margin-bottom:7px;
+}
+
+
+/* PUESTO */
+
+.puesto-vendedor{
+    color:#00a2ff;
+
+    font-size:18px;
+
+    margin-bottom:12px;
+}
+
+
+/* LOGO */
+
+.logo-agencia{
+    width:125px;
+    height:80px;
+
+    object-fit:contain;
+
+    margin-bottom:8px;
+}
+
+
+/* LÍNEA */
+
+.linea{
+    width:125px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #009cff,
+            transparent
+        );
+
+    margin-bottom:16px;
+}
+
+
+/* FRASE */
+
+.frase{
+    text-align:center;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size:20px;
+
+    line-height:1.4;
+
+    color:#eeeeee;
+
+    margin-bottom:10px;
+}
+
+
+/* CORAZÓN */
+
+.corazon{
+    color:#00a2ff;
+
+    font-size:30px;
+
+    margin-bottom:18px;
+}
+
+
+/* =====================================================
+   MENÚ
+===================================================== */
+
+.menu{
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:13px;
+}
+
+.boton-menu{
+    width:100%;
+
+    min-height:68px;
+
+    padding:12px 17px;
+
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+
+    color:#ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.2s;
+}
+
+.boton-menu:hover,
+.boton-menu.activo{
+
+    border-color:#009cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,156,255,.20),
+            rgba(0,70,140,.06)
+        );
+
+    box-shadow:
+        0 0 18px rgba(0,156,255,.20);
+}
+
+.icono-menu{
+    width:32px;
+    min-width:32px;
+
+    text-align:center;
+
+    font-size:25px;
+
+    color:#009cff;
+}
+
+.texto-menu{
+    font-size:17px;
+}
+
+
+/* =====================================================
+   CONTENIDO DERECHO
+===================================================== */
+
+.contenido{
+    flex:1;
+
+    min-width:0;
+
+    padding:12px;
+}
+
+
+/* =====================================================
+   BIENVENIDA
+===================================================== */
+
+.bienvenida{
+
+    width:100%;
+
+    min-height:492px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius:15px;
+
+    background:
+
+        radial-gradient(
+            circle at 80% 45%,
+            rgba(0,110,255,.18),
+            transparent 36%
+        ),
+
+        linear-gradient(
+            110deg,
+            #02050a 0%,
+            #050913 45%,
+            #02050a 100%
+        );
+}
+
+
+/* LUZ */
+
+.luz{
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    right:5%;
+    top:10%;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,100,255,.10);
+
+    filter:blur(55px);
+}
+
+
+/* MARCO AZUL */
+
+.marco{
+
+    position:absolute;
+
+    right:25px;
+    top:40px;
+
+    width:185px;
+    height:385px;
+
+    border:
+        3px solid #147cff;
+
+    border-left:none;
+
+    transform:skewY(-10deg);
+
+    box-shadow:
+        0 0 15px rgba(20,124,255,.75);
+
+    opacity:.8;
+}
+
+
+/* TEXTO */
+
+.texto-bienvenida{
+
+    position:absolute;
+
+    left:42px;
+    top:58px;
+
+    width:47%;
+
+    z-index:5;
+}
+
+.hola{
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size:38px;
+
+    color:#00a2ff;
+
+    margin-bottom:6px;
+}
+
+.bienvenido{
+
+    font-size:28px;
+
+    margin-bottom:7px;
+}
+
+.soy{
+
+    font-size:46px;
+
+    font-weight:900;
+
+    line-height:1.05;
+}
+
+.soy span{
+    color:#087df2;
+}
+
+.descripcion{
+
+    margin-top:27px;
+
+    max-width:520px;
+
+    font-size:20px;
+
+    line-height:1.65;
+
+    color:#eeeeee;
+}
+
+.frase-final{
+
+    margin-top:22px;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    color:#00a2ff;
+
+    font-size:29px;
+}
+
+
+/* AUTO PRINCIPAL */
+
+.auto-principal{
+
+    position:absolute;
+
+    right:10px;
+    bottom:8px;
+
+    width:59%;
+
+    max-width:760px;
+
+    z-index:4;
+
+    filter:
+        drop-shadow(
+            0 20px 25px rgba(0,0,0,.8)
+        );
+}
+
+
+/* =====================================================
+   PROMOCIÓN
+===================================================== */
+
+.promocion{
+
+    width:100%;
+
+    min-height:455px;
+
+    margin-top:12px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:15px;
+
+    border:
+        1px solid rgba(255,195,0,.80);
+
+    background:
+
+        radial-gradient(
+            circle at 85% 50%,
+            rgba(255,180,0,.17),
+            transparent 33%
+        ),
+
+        linear-gradient(
+            115deg,
+            #050505 0%,
+            #0a0803 50%,
+            #070501 100%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,190,0,.10);
+}
+
+
+/* ETIQUETA */
+
+.etiqueta{
+
+    position:absolute;
+
+    left:22px;
+    top:22px;
+
+    min-width:380px;
+
+    padding:14px 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e20c0c,
+            #ff2917
+        );
+
+    font-size:25px;
+
+    font-weight:900;
+
+    z-index:8;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            94% 100%,
+            0 100%
+        );
+}
+
+
+/* TEXTO PROMOCIÓN */
+
+.texto-promocion{
+
+    position:absolute;
+
+    left:32px;
+    top:105px;
+
+    width:39%;
+
+    z-index:6;
+}
+
+.marca{
+
+    font-size:24px;
+
+    font-weight:900;
+}
+
+.modelo{
+
+    font-size:42px;
+
+    font-weight:900;
+
+    line-height:1.05;
+}
+
+.version{
+
+    margin-top:8px;
+
+    color:#ffd000;
+
+    font-size:25px;
+
+    font-weight:900;
+}
+
+.precio-label{
+
+    margin-top:30px;
+
+    font-size:20px;
+}
+
+.precio{
+
+    color:#ffd000;
+
+    font-size:56px;
+
+    line-height:1;
+
+    font-weight:900;
+
+    margin-top:3px;
+}
+
+.precio-anterior{
+
+    margin-top:18px;
+
+    color:#aaa;
+
+    font-size:20px;
+}
+
+.precio-anterior span{
+
+    text-decoration:line-through;
+}
+
+
+/* =====================================================
+   BENEFICIOS
+===================================================== */
+
+.beneficios{
+
+    position:absolute;
+
+    left:41%;
+
+    top:105px;
+
+    width:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    z-index:7;
+}
+
+.beneficio{
+
+    min-height:74px;
+
+    padding:10px 12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    border:
+        1px solid rgba(255,205,0,.85);
+
+    border-radius:10px;
+
+    background:
+        rgba(0,0,0,.55);
+}
+
+.icono-beneficio{
+
+    width:43px;
+    height:43px;
+
+    min-width:43px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#ffd000;
+
+    color:#111;
+
+    font-size:22px;
+
+    font-weight:900;
+}
+
+.texto-beneficio{
+
+    font-size:14px;
+
+    line-height:1.25;
+}
+
+.texto-beneficio strong{
+
+    display:block;
+
+    color:#ffd000;
+
+    font-size:21px;
+
+    margin-top:2px;
+}
+
+
+/* AUTO PROMOCIÓN */
+
+.auto-promocion{
+
+    position:absolute;
+
+    right:8px;
+
+    bottom:70px;
+
+    width:48%;
+
+    max-width:620px;
+
+    z-index:5;
+
+    filter:
+        drop-shadow(
+            0 22px 20px rgba(0,0,0,.85)
+        );
+}
+
+
+/* BOTÓN */
+
+.boton-promocion{
+
+    position:absolute;
+
+    right:27px;
+
+    bottom:18px;
+
+    width:32%;
+
+    min-height:64px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffd91a,
+            #f6bd00
+        );
+
+    color:#111;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    z-index:10;
+}
+
+
+/* =====================================================
+   SECCIONES TEMPORALES
+===================================================== */
+
+.seccion{
+
+    display:none;
+
+    min-height:500px;
+
+    padding:60px 30px;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #080b12,
+            #05070c
+        );
+
+    text-align:center;
+}
+
+.seccion h2{
+
+    font-size:38px;
+
+    margin-bottom:15px;
+}
+
+.seccion p{
+
+    color:#bfc4cc;
+
+    font-size:18px;
+}
+
+
+/* =====================================================
+   IMPORTANTE:
+   CELULAR
+===================================================== */
+
+/*
+   NO convertimos el menú en un bloque superior.
+
+   La composición sigue siendo:
+
+   MENÚ | CONTENIDO
+
+   exactamente como el boceto.
+*/
+
+@media(max-width:800px){
+
+    .pagina{
+
+        display:flex;
+
+        width:100%;
+
+        min-width:720px;
+    }
+
+    .sidebar{
+
+        width:180px;
+
+        min-width:180px;
+
+        min-height:100vh;
+
+        padding:18px 10px;
+    }
+
+    .foto-vendedor{
+
+        width:88px;
+        height:88px;
+
+        margin-bottom:8px;
+    }
+
+    .nombre-vendedor{
+
+        font-size:18px;
+    }
+
+    .puesto-vendedor{
+
+        font-size:13px;
+
+        margin-bottom:7px;
+    }
+
+    .logo-agencia{
+
+        width:85px;
+        height:58px;
+    }
+
+    .linea{
+
+        width:80px;
+
+        margin-bottom:10px;
+    }
+
+    .frase{
+
+        font-size:14px;
+
+        margin-bottom:5px;
+    }
+
+    .corazon{
+
+        font-size:22px;
+
+        margin-bottom:10px;
+    }
+
+    .menu{
+
+        gap:7px;
+    }
+
+    .boton-menu{
+
+        min-height:47px;
+
+        padding:7px 8px;
+
+        gap:7px;
+    }
+
+    .icono-menu{
+
+        width:24px;
+        min-width:24px;
+
+        font-size:18px;
+    }
+
+    .texto-menu{
+
+        font-size:11px;
+    }
+
+    .contenido{
+
+        width:calc(100% - 180px);
+
+        min-width:540px;
+
+        padding:8px;
+    }
+
+    .bienvenida{
+
+        min-height:390px;
+
+        border-radius:11px;
+    }
+
+    .texto-bienvenida{
+
+        left:25px;
+
+        top:42px;
+
+        width:48%;
+    }
+
+    .hola{
+
+        font-size:28px;
+    }
+
+    .bienvenido{
+
+        font-size:19px;
+    }
+
+    .soy{
+
+        font-size:30px;
+    }
+
+    .descripcion{
+
+        margin-top:17px;
+
+        font-size:14px;
+
+        line-height:1.5;
+    }
+
+    .frase-final{
+
+        margin-top:14px;
+
+        font-size:21px;
+    }
+
+    .auto-principal{
+
+        width:59%;
+
+        right:4px;
+
+        bottom:8px;
+    }
+
+    .marco{
+
+        width:125px;
+
+        height:300px;
+
+        right:12px;
+
+        top:30px;
+    }
+
+    .promocion{
+
+        min-height:360px;
+
+        margin-top:8px;
+    }
+
+    .etiqueta{
+
+        left:14px;
+
+        top:14px;
+
+        min-width:270px;
+
+        padding:10px 16px;
+
+        font-size:17px;
+    }
+
+    .texto-promocion{
+
+        left:22px;
+
+        top:72px;
+
+        width:39%;
+    }
+
+    .marca{
+
+        font-size:16px;
+    }
+
+    .modelo{
+
+        font-size:28px;
+    }
+
+    .version{
+
+        font-size:17px;
+    }
+
+    .precio-label{
+
+        margin-top:18px;
+
+        font-size:14px;
+    }
+
+    .precio{
+
+        font-size:38px;
+    }
+
+    .precio-anterior{
+
+        margin-top:10px;
+
+        font-size:14px;
+    }
+
+    .beneficios{
+
+        left:41%;
+
+        top:72px;
+
+        width:145px;
+
+        gap:7px;
+    }
+
+    .beneficio{
+
+        min-height:55px;
+
+        padding:6px;
+
+        gap:6px;
+    }
+
+    .icono-beneficio{
+
+        width:29px;
+        height:29px;
+
+        min-width:29px;
+
+        font-size:14px;
+    }
+
+    .texto-beneficio{
+
+        font-size:9px;
+    }
+
+    .texto-beneficio strong{
+
+        font-size:13px;
+    }
+
+    .auto-promocion{
+
+        width:48%;
+
+        right:4px;
+
+        bottom:48px;
+    }
+
+    .boton-promocion{
+
+        right:10px;
+
+        bottom:10px;
+
+        width:30%;
+
+        min-height:44px;
+
+        font-size:11px;
+    }
+}
+
+
+/* =====================================================
+   PANTALLAS MUY PEQUEÑAS
+===================================================== */
+
+@media(max-width:400px){
+
+    .pagina{
+
+        min-width:680px;
+    }
+
+    .sidebar{
+
+        width:165px;
+
+        min-width:165px;
+    }
+
+    .contenido{
+
+        min-width:515px;
+    }
+
+    .texto-menu{
+
+        font-size:10px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="pagina">
+
+
+<!-- ==================================================
+     MENÚ DEL VENDEDOR
+================================================== -->
+
+<aside class="sidebar">
+
+
+    <img
+        class="foto-vendedor"
+        src="IMG_6718.jpeg"
+        alt="Carlos Ramírez"
+    >
+
+
+    <h1 class="nombre-vendedor">
+        Carlos Ramírez
+    </h1>
+
+
+    <div class="puesto-vendedor">
+        Asesor de Ventas
+    </div>
+
+
+    <img
+        class="logo-agencia"
+        src="IMG_6717.png"
+        alt="Mitsubishi Motors"
+    >
+
+
+    <div class="linea"></div>
+
+
+    <div class="frase">
+
+        Estoy aquí para ayudarte<br>
+        a encontrar tu próximo auto.
+
+    </div>
+
+
+    <div class="corazon">
+        ♡
+    </div>
+
+
+    <nav class="menu">
+
+
+        <button
+            class="boton-menu activo"
+            onclick="mostrar('inicio')"
+        >
+
+            <span class="icono-menu">
+                🚗
+            </span>
+
+            <span class="texto-menu">
+                Catálogo
+            </span>
+
+        </button>
+
+
+        <button
+            class="boton-menu"
+            onclick="mostrar('cotizar')"
+        >
+
+            <span class="icono-menu">
+                ▦
+            </span>
+
+            <span class="texto-menu">
+                Cotizar
+            </span>
+
+        </button>
+
+
+        <button
+            class="boton-menu"
+            onclick="mostrar('prueba')"
+        >
+
+            <span class="icono-menu">
+                ◎
+            </span>
+
+            <span class="texto-menu">
+                Prueba de manejo
+            </span>
+
+        </button>
+
+
+        <button
+            class="boton-menu"
+            onclick="mostrar('cita')"
+        >
+
+            <span class="icono-menu">
+                ▣
+            </span>
+
+            <span class="texto-menu">
+                Generar cita
+            </span>
+
+        </button>
+
+
+        <button
+            class="boton-menu"
+            onclick="mostrar('informacion')"
+        >
+
+            <span class="icono-menu">
+                ◯
+            </span>
+
+            <span class="texto-menu">
+                Solicitar más información
+            </span>
+
+        </button>
+
+
+    </nav>
+
+</aside>
+
+
+
+<!-- ==================================================
+     CONTENIDO
+================================================== -->
+
+<main class="contenido">
+
+
+<!-- ==================================================
+     BIENVENIDA
+================================================== -->
+
+<section
+    id="inicio"
+    class="bienvenida"
+>
+
+
+    <div class="luz"></div>
+
+
+    <div class="marco"></div>
+
+
+    <div class="texto-bienvenida">
+
+
+        <div class="hola">
+            ¡Hola!
+        </div>
+
+
+        <div class="bienvenido">
+            Bienvenido a tu espacio
+        </div>
+
+
+        <div class="soy">
+
+            Soy
+            <span>
+                Carlos Ramírez
+            </span>
+
+        </div>
+
+
+        <div class="descripcion">
+
+            Este es mi espacio personal creado para ti,
+            donde te ayudo a encontrar el auto perfecto.
+
+        </div>
+
+
+        <div class="frase-final">
+
+            Tú eliges, yo te asesoro.
+
+        </div>
+
+
+    </div>
+
+
+    <img
+        class="auto-principal"
+        src="IMG_6715.webp"
+        alt="Mitsubishi Outlander"
+    >
+
+
+</section>
+
+
+
+<!-- ==================================================
+     PROMOCIÓN DEL MES
+================================================== -->
+
+<section
+    id="promocion"
+    class="promocion"
+>
+
+
+    <div class="etiqueta">
+
+        🔥 PROMOCIÓN DEL MES
+
+    </div>
+
+
+    <div class="texto-promocion">
+
+
+        <div class="marca">
+            MITSUBISHI
+        </div>
+
+
+        <div class="modelo">
+            OUTLANDER 2026
+        </div>
+
+
+        <div class="version">
+            VERSIÓN SE PLUS
+        </div>
+
+
+        <div class="precio-label">
+            Precio especial desde
+        </div>
+
+
+        <div class="precio">
+            $649,900
+        </div>
+
+
+        <div class="precio-anterior">
+
+            Antes:
+            <span>
+                $729,900
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- BENEFICIOS -->
+
+    <div class="beneficios">
+
+
+        <div class="beneficio">
+
+
+            <div class="icono-beneficio">
+                $
+            </div>
+
+
+            <div class="texto-beneficio">
+
+                BONIFICACIÓN DE
+
+                <strong>
+                    $60,000
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="beneficio">
+
+
+            <div class="icono-beneficio">
+                ✓
+            </div>
+
+
+            <div class="texto-beneficio">
+
+                SEGURO GRATIS
+
+                <strong>
+                    1 año
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="beneficio">
+
+
+            <div class="icono-beneficio">
+                📅
+            </div>
+
+
+            <div class="texto-beneficio">
+
+                VIGENCIA HASTA EL
+
+                <strong>
+                    30 SEPTIEMBRE
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- AUTO DE PROMOCIÓN -->
+
+    <img
+        class="auto-promocion"
+        src="IMG_6716.jpeg"
+        alt="Mitsubishi Outlander promoción"
+    >
+
+
+    <!-- BOTÓN -->
+
+    <button
+        class="boton-promocion"
+        onclick="promocion()"
+    >
+
+        🎁 QUIERO CONOCER LA PROMOCIÓN
+
+    </button>
+
+
+</section>
+
+
+
+<!-- ==================================================
+     COTIZAR
+================================================== -->
+
+<section
+    id="cotizar"
+    class="seccion"
+>
+
+    <h2>
+        Cotización rápida
+    </h2>
+
+    <p>
+        Aquí construiremos el cotizador.
+    </p>
+
+</section>
+
+
+
+<!-- ==================================================
+     PRUEBA DE MANEJO
+================================================== -->
+
+<section
+    id="prueba"
+    class="seccion"
+>
+
+    <h2>
+        Solicita prueba de manejo
+    </h2>
+
+    <p>
+        Aquí construiremos el calendario
+        para elegir fecha, hora y modelo.
+    </p>
+
+</section>
+
+
+
+<!-- ==================================================
+     CITA
+================================================== -->
+
+<section
+    id="cita"
+    class="seccion"
+>
+
+    <h2>
+        Generar cita
+    </h2>
+
+    <p>
+        Aquí construiremos el sistema de citas.
+    </p>
+
+</section>
+
+
+
+<!-- ==================================================
+     INFORMACIÓN
+================================================== -->
+
+<section
+    id="informacion"
+    class="seccion"
+>
+
+    <h2>
+        Solicitar más información
+    </h2>
+
+    <p>
+        Aquí construiremos las opciones
+        de WhatsApp y llamada.
+    </p>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+function mostrar(id){
+
+    const secciones =
+        document.querySelectorAll(".seccion");
+
+
+    secciones.forEach(
+        function(seccion){
+
+            seccion.style.display = "none";
+
+        }
+    );
+
+
+    const bienvenida =
+        document.getElementById("inicio");
+
+    const promocion =
+        document.getElementById("promocion");
+
+
+    const botones =
+        document.querySelectorAll(".boton-menu");
+
+
+    botones.forEach(
+        function(boton){
+
+            boton.classList.remove("activo");
+
+        }
+    );
+
+
+    if(id === "inicio"){
+
+        bienvenida.style.display = "block";
+
+        promocion.style.display = "block";
+
+        botones[0].classList.add("activo");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+        return;
+    }
+
+
+    bienvenida.style.display = "none";
+
+    promocion.style.display = "none";
+
+
+    const seccion =
+        document.getElementById(id);
+
+
+    if(seccion){
+
+        seccion.style.display = "block";
+
+        seccion.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+
+
+    const posiciones = {
+
+        cotizar:1,
+
+        prueba:2,
+
+        cita:3,
+
+        informacion:4
+
+    };
+
+
+    if(posiciones[id] !== undefined){
+
+        botones[
+            posiciones[id]
+        ].classList.add("activo");
+
+    }
+
+}
+
+
+/* =====================================================
+   PROMOCIÓN
+===================================================== */
+
+function promocion(){
+
+    alert(
+        "Aquí conectaremos esta promoción con WhatsApp."
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
