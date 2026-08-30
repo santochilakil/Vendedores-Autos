@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Carlos Ramírez | Mitsubishi Motors</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --fondo: #02050a;
+    --azul: #008cff;
+    --azul2: #00b7ff;
+    --amarillo: #ffc400;
+    --rojo: #ff1b16;
+    --blanco: #ffffff;
+    --gris: #bfc5ce;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #02050a;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+/* =====================================
+   ESTRUCTURA PRINCIPAL
+===================================== */
+
+.app {
+    width: 96%;
+    max-width: 1500px;
+    margin: 12px auto;
+
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 12px;
+}
+
+/* =====================================
+   MENU LATERAL
+===================================== */
+
+.sidebar {
+    background:
+        linear-gradient(180deg, #050910, #02050a);
+
+    border: 1px solid #26313d;
+    border-radius: 15px;
+
+    padding: 25px 17px;
+
+    min-height: calc(100vh - 24px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-photo {
+    width: 135px;
+    height: 135px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+    border: 2px solid var(--azul);
+
+    box-shadow:
+        0 0 12px rgba(0,150,255,.9),
+        0 0 28px rgba(0,120,255,.3);
+}
+
+.profile-name {
+    margin-top: 14px;
+
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.profile-job {
+    margin-top: 4px;
+
+    color: var(--azul2);
+    font-size: 17px;
+}
+
+.brand-logo {
+    width: 105px;
+    height: 78px;
+
+    object-fit: contain;
+
+    margin-top: 15px;
+}
+
+.profile-message {
+    margin-top: 14px;
+
+    color: #ddd;
+
+    font-size: 15px;
+    line-height: 1.45;
+
+    font-style: italic;
+}
+
+.heart {
+    margin-top: 8px;
+
+    color: var(--azul2);
+
+    font-size: 28px;
+}
+
+/* =====================================
+   BOTONES
+===================================== */
+
+.menu {
+    width: 100%;
+
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.menu-button {
+    width: 100%;
+    min-height: 58px;
+
+    border-radius: 10px;
+    border: 1px solid #29333e;
+
+    background:
+        linear-gradient(145deg, #0b0f15, #05080d);
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.menu-button.active {
+    border-color: var(--azul);
+
+    box-shadow:
+        0 0 12px rgba(0,150,255,.3),
+        inset 0 0 18px rgba(0,150,255,.08);
+}
+
+.menu-icon {
+    width: 28px;
+
+    color: var(--azul);
+
+    font-size: 21px;
+
+    text-align: center;
+}
+
+/* =====================================
+   CONTENIDO
+===================================== */
+
+.main {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+/* =====================================
+   BIENVENIDA
+===================================== */
+
+.welcome {
+    position: relative;
+
+    height: 475px;
+
+    overflow: hidden;
+
+    border: 1px solid #26313d;
+    border-radius: 15px;
+
+    background:
+        radial-gradient(
+            circle at 75% 50%,
+            rgba(0,100,210,.22),
+            transparent 42%
+        ),
+        linear-gradient(
+            120deg,
+            #03060b,
+            #02060d
+        );
+}
+
+.welcome::after {
+    content: "";
+
+    position: absolute;
+
+    right: 3%;
+    top: 8%;
+
+    width: 28%;
+    height: 82%;
+
+    border: 2px solid rgba(0,130,255,.65);
+
+    box-shadow:
+        0 0 22px rgba(0,130,255,.2),
+        inset 0 0 35px rgba(0,130,255,.07);
+
+    z-index: 1;
+}
+
+.welcome-content {
+    position: relative;
+
+    z-index: 5;
+
+    width: 52%;
+
+    padding: 48px 20px 30px 35px;
+}
+
+.hello {
+    color: var(--azul2);
+
+    font-size: 38px;
+
+    font-family: cursive;
+    font-style: italic;
+}
+
+.welcome-subtitle {
+    margin-top: 2px;
+
+    font-size: 26px;
+}
+
+.welcome-name {
+    margin-top: 8px;
+
+    font-size: 45px;
+
+    font-weight: 900;
+
+    line-height: 1.05;
+}
+
+.welcome-name span {
+    color: var(--azul);
+}
+
+.welcome-text {
+    margin-top: 25px;
+
+    font-size: 19px;
+
+    line-height: 1.5;
+
+    color: #eee;
+}
+
+.signature {
+    margin-top: 25px;
+
+    color: var(--azul2);
+
+    font-family: cursive;
+    font-style: italic;
+
+    font-size: 27px;
+}
+
+/* =====================================
+   CAMIONETA BIENVENIDA
+   MISMO ARCHIVO IMG_6730.PNG
+===================================== */
+
+.welcome-car {
+    position: absolute;
+
+    z-index: 4;
+
+    width: 57%;
+
+    max-width: 700px;
+
+    right: -4%;
+    bottom: 7%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 18px 22px rgba(0,0,0,.85));
+}
+
+/* =====================================
+   PROMOCION
+===================================== */
+
+.promo {
+    position: relative;
+
+    height: 405px;
+
+    overflow: hidden;
+
+    border: 2px solid var(--amarillo);
+
+    border-radius: 15px;
+
+    background:
+        radial-gradient(
+            circle at 75% 45%,
+            rgba(255,180,0,.15),
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #090700,
+            #030302
+        );
+
+    box-shadow:
+        0 0 18px rgba(255,190,0,.12);
+}
+
+/* TITULO PROMOCION */
+
+.promo-title {
+    position: absolute;
+
+    z-index: 8;
+
+    top: 20px;
+    left: 24px;
+
+    padding: 11px 35px 11px 22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e80000,
+            #ff3718
+        );
+
+    color: white;
+
+    font-size: 25px;
+    font-weight: 900;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            91% 100%,
+            0 100%
+        );
+}
+
+/* TEXTO */
+
+.promo-content {
+    position: relative;
+
+    z-index: 6;
+
+    width: 57%;
+
+    padding:
+        90px
+        20px
+        25px
+        30px;
+}
+
+.promo-brand {
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+.promo-model {
+    margin-top: 7px;
+
+    font-size: 35px;
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+.promo-version {
+    margin-top: 10px;
+
+    color: var(--amarillo);
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+.price-label {
+    margin-top: 29px;
+
+    font-size: 17px;
+}
+
+.price {
+    margin-top: 2px;
+
+    color: var(--amarillo);
+
+    font-size: 45px;
+
+    font-weight: 900;
+}
+
+.old-price {
+    margin-top: 7px;
+
+    color: #aaa;
+
+    font-size: 17px;
+}
+
+.old-price span {
+    text-decoration: line-through;
+}
+
+/* =====================================
+   BENEFICIOS
+===================================== */
+
+.promo-benefits {
+    position: absolute;
+
+    z-index: 8;
+
+    top: 100px;
+    left: 47%;
+
+    width: 220px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.benefit {
+    border: 1px solid rgba(255,195,0,.8);
+
+    border-radius: 10px;
+
+    padding: 10px;
+
+    background:
+        rgba(0,0,0,.42);
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.benefit-icon {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--amarillo);
+
+    color: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.benefit-text {
+    font-size: 13px;
+
+    line-height: 1.25;
+}
+
+.benefit-text strong {
+    display: block;
+
+    color: var(--amarillo);
+
+    font-size: 17px;
+}
+
+/* =====================================
+   CAMIONETA PROMOCION
+   MISMO ARCHIVO IMG_6730.PNG
+===================================== */
+
+.promo-car {
+    position: absolute;
+
+    z-index: 5;
+
+    width: 48%;
+
+    max-width: 600px;
+
+    right: 1%;
+    bottom: 57px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 18px 22px rgba(0,0,0,.85));
+}
+
+/* =====================================
+   BOTON
+===================================== */
+
+.promo-button {
+    position: absolute;
+
+    z-index: 10;
+
+    right: 24px;
+    bottom: 18px;
+
+    padding: 14px 25px;
+
+    border: 1px solid var(--amarillo);
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffd21a,
+            #efad00
+        );
+
+    color: #080808;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 950px) {
+
+    .app {
+        width: 98%;
+        grid-template-columns: 190px 1fr;
+        gap: 8px;
+    }
+
+    .sidebar {
+        padding: 18px 9px;
+    }
+
+    .profile-photo {
+        width: 95px;
+        height: 95px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile-job {
+        font-size: 12px;
+    }
+
+    .brand-logo {
+        width: 75px;
+    }
+
+    .profile-message {
+        font-size: 11px;
+    }
+
+    .menu {
+        margin-top: 17px;
+    }
+
+    .menu-button {
+        min-height: 45px;
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .menu-icon {
+        font-size: 17px;
+        width: 22px;
+    }
+
+    .welcome {
+        height: 330px;
+    }
+
+    .welcome-content {
+        padding: 30px 12px;
+    }
+
+    .hello {
+        font-size: 26px;
+    }
+
+    .welcome-subtitle {
+        font-size: 18px;
+    }
+
+    .welcome-name {
+        font-size: 30px;
+    }
+
+    .welcome-text {
+        margin-top: 15px;
+        font-size: 13px;
+    }
+
+    .signature {
+        margin-top: 14px;
+        font-size: 19px;
+    }
+
+    .promo {
+        height: 285px;
+    }
+
+    .promo-title {
+        top: 12px;
+        left: 12px;
+        font-size: 17px;
+    }
+
+    .promo-content {
+        padding: 62px 12px 15px;
+    }
+
+    .promo-model {
+        font-size: 23px;
+    }
+
+    .promo-version {
+        font-size: 14px;
+    }
+
+    .price-label {
+        margin-top: 18px;
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 30px;
+    }
+
+    .old-price {
+        font-size: 12px;
+    }
+
+    .promo-benefits {
+        top: 67px;
+        left: 46%;
+        width: 145px;
+    }
+
+    .benefit {
+        padding: 6px;
+    }
+
+    .benefit-icon {
+        width: 27px;
+        height: 27px;
+        font-size: 13px;
+    }
+
+    .benefit-text {
+        font-size: 9px;
+    }
+
+    .benefit-text strong {
+        font-size: 12px;
+    }
+
+    .promo-button {
+        font-size: 10px;
+        padding: 9px 12px;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+
+/* =====================================
+   CELULAR
+   CONSERVA EL BOCETO HORIZONTAL
+===================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .app {
+        width: 100%;
+
+        margin: 4px 0;
+
+        padding: 0 4px;
+
+        grid-template-columns: 104px 1fr;
+
+        gap: 5px;
+    }
+
+    /* MENU */
+
+    .sidebar {
+        min-height: calc(100vh - 8px);
+
+        padding: 11px 5px;
+
+        border-radius: 9px;
+    }
+
+    .profile-photo {
+        width: 63px;
+        height: 63px;
+    }
+
+    .profile-name {
+        margin-top: 7px;
+
+        font-size: 12px;
+    }
+
+    .profile-job {
+        margin-top: 3px;
+
+        font-size: 8px;
+    }
+
+    .brand-logo {
+        width: 54px;
+        height: 45px;
+
+        margin-top: 7px;
+    }
+
+    .profile-message {
+        margin-top: 7px;
+
+        font-size: 7px;
+
+        line-height: 1.3;
+    }
+
+    .heart {
+        margin-top: 5px;
+
+        font-size: 17px;
+    }
+
+    .menu {
+        margin-top: 12px;
+
+        gap: 5px;
+    }
+
+    .menu-button {
+        min-height: 42px;
+
+        border-radius: 7px;
+
+        padding: 4px 3px;
+
+        gap: 2px;
+
+        font-size: 7px;
+    }
+
+    .menu-icon {
+        width: 18px;
+
+        font-size: 13px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    /* AREA */
+
+    .main {
+        gap: 5px;
+    }
+
+    /* BIENVENIDA */
+
+    .welcome {
+        height: 248px;
+
+        border-radius: 9px;
+    }
+
+    .welcome-content {
+        width: 53%;
+
+        padding:
+            21px
+            5px
+            8px
+            9px;
+    }
+
+    .hello {
+        font-size: 18px;
+    }
+
+    .welcome-subtitle {
+        font-size: 11px;
+    }
+
+    .welcome-name {
+        margin-top: 4px;
+
+        font-size: 18px;
+    }
+
+    .welcome-text {
+        margin-top: 11px;
+
+        font-size: 7px;
+
+        line-height: 1.45;
+    }
+
+    .signature {
+        margin-top: 10px;
+
+        font-size: 13px;
+    }
+
+    .welcome::after {
+        width: 35%;
+
+        right: 2%;
+        top: 8%;
+
+        height: 82%;
+
+        border-width: 1px;
+    }
+
+    .welcome-car {
+        width: 57%;
+
+        right: -5%;
+
+        bottom: 9px;
+    }
+
+    /* PROMOCION */
+
+    .promo {
+        height: 255px;
+
+        border-radius: 9px;
+    }
+
+    .promo-title {
+        top: 8px;
+        left: 7px;
+
+        padding:
+            6px
+            18px
+            6px
+            9px;
+
+        font-size: 10px;
+    }
+
+    .promo-content {
+        width: 57%;
+
+        padding:
+            41px
+            5px
+            8px
+            8px;
+    }
+
+    .promo-brand {
+        font-size: 7px;
+    }
+
+    .promo-model {
+        margin-top: 3px;
+
+        font-size: 14px;
+    }
+
+    .promo-version {
+        margin-top: 4px;
+
+        font-size: 8px;
+    }
+
+    .price-label {
+        margin-top: 13px;
+
+        font-size: 7px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .old-price {
+        margin-top: 3px;
+
+        font-size: 7px;
+    }
+
+    .promo-benefits {
+        top: 43px;
+
+        left: 46%;
+
+        width: 44%;
+
+        gap: 4px;
+    }
+
+    .benefit {
+        border-radius: 6px;
+
+        padding: 4px;
+
+        gap: 3px;
+    }
+
+    .benefit-icon {
+        width: 21px;
+        height: 21px;
+
+        font-size: 9px;
+    }
+
+    .benefit-text {
+        font-size: 5.5px;
+    }
+
+    .benefit-text strong {
+        font-size: 7.5px;
+    }
+
+    .promo-car {
+        width: 50%;
+
+        right: -2%;
+
+        bottom: 35px;
+    }
+
+    .promo-button {
+        right: 6px;
+        bottom: 6px;
+
+        padding:
+            6px
+            8px;
+
+        border-radius: 5px;
+
+        font-size: 6.5px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =================================
+         MENU DEL VENDEDOR
+    ================================== -->
+
+    <aside class="sidebar">
+
+        <div class="profile">
+
+            <img
+                class="profile-photo"
+                src="IMG_6718.jpeg"
+                alt="Carlos Ramírez"
+            >
+
+            <div class="profile-name">
+                Carlos Ramírez
+            </div>
+
+            <div class="profile-job">
+                Asesor de Ventas
+            </div>
+
+            <img
+                class="brand-logo"
+                src="IMG_6731.jpeg"
+                alt="Mitsubishi Motors"
+            >
+
+            <div class="profile-message">
+                Estoy aquí para ayudarte<br>
+                a encontrar tu próximo auto.
+            </div>
+
+            <div class="heart">
+                ♡
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <button class="menu-button active">
+                <span class="menu-icon">🚗</span>
+                <span>Catálogo</span>
+            </button>
+
+            <button class="menu-button">
+                <span class="menu-icon">▦</span>
+                <span>Cotizar</span>
+            </button>
+
+            <button class="menu-button">
+                <span class="menu-icon">◉</span>
+                <span>Prueba de manejo</span>
+            </button>
+
+            <button class="menu-button">
+                <span class="menu-icon">▣</span>
+                <span>Generar cita</span>
+            </button>
+
+            <button class="menu-button">
+                <span class="menu-icon">○</span>
+                <span>Solicitar más información</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =================================
+         CONTENIDO PRINCIPAL
+    ================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================
+             BIENVENIDA
+        ================================== -->
+
+        <section class="welcome">
+
+            <div class="welcome-content">
+
+                <div class="hello">
+                    ¡Hola!
+                </div>
+
+                <div class="welcome-subtitle">
+                    Bienvenido a tu espacio
+                </div>
+
+                <div class="welcome-name">
+                    Soy <span>Carlos Ramírez</span>
+                </div>
+
+                <p class="welcome-text">
+                    Este es mi espacio personal creado para ti,
+                    donde te ayudo a encontrar el auto perfecto.
+                </p>
+
+                <div class="signature">
+                    Tú eliges, yo te asesoro.
+                </div>
+
+            </div>
+
+
+            <!-- MISMA CAMIONETA -->
+
+            <img
+                class="welcome-car"
+                src="IMG_6730.png"
+                alt="Mitsubishi Outlander"
+            >
+
+        </section>
+
+
+        <!-- =================================
+             PROMOCION
+        ================================== -->
+
+        <section class="promo">
+
+            <div class="promo-title">
+                🔥 PROMOCIÓN DEL MES
+            </div>
+
+
+            <div class="promo-content">
+
+                <div class="promo-brand">
+                    MITSUBISHI
+                </div>
+
+                <div class="promo-model">
+                    OUTLANDER 2026
+                </div>
+
+                <div class="promo-version">
+                    VERSIÓN SE PLUS
+                </div>
+
+                <div class="price-label">
+                    Precio especial desde
+                </div>
+
+                <div class="price">
+                    $649,900
+                </div>
+
+                <div class="old-price">
+                    Antes:
+                    <span>$729,900</span>
+                </div>
+
+            </div>
+
+
+            <!-- BENEFICIOS -->
+
+            <div class="promo-benefits">
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        $
+                    </div>
+
+                    <div class="benefit-text">
+                        BONIFICACIÓN DE
+                        <strong>$60,000</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        ✓
+                    </div>
+
+                    <div class="benefit-text">
+                        SEGURO GRATIS
+                        <strong>1 año</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        📅
+                    </div>
+
+                    <div class="benefit-text">
+                        VIGENCIA HASTA EL
+                        <strong>30 SEPTIEMBRE</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MISMA CAMIONETA DE ARRIBA -->
+
+            <img
+                class="promo-car"
+                src="IMG_6730.png"
+                alt="Mitsubishi Outlander"
+            >
+
+
+            <button class="promo-button">
+                🎁 QUIERO CONOCER LA PROMOCIÓN
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
