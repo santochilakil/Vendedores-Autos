@@ -1537,7 +1537,12 @@
         .getElementById("editarPromoFondo")
         .value =
           vendedor.promoFondo || "";
+      /* TASA DE INTERÉS */
 
+      document
+        .getElementById("editarTasaInteres")
+        .value =
+          vendedor.tasaInteres ?? "";
 
       actualizarPreview();
 
