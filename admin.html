@@ -1658,7 +1658,12 @@
               .getElementById("editarPromoFondo")
               .value
               .trim(),
-
+          tasaInteres:
+            Number(
+              document
+                .getElementById("editarTasaInteres")
+                .value
+            ) || 0,
           fechaActualizacion:
             firebase.firestore.FieldValue.serverTimestamp()
 
